@@ -1,0 +1,31 @@
+@forward 'element-plus/theme-chalk/src/mixins/config.scss' with (
+  $namespace: 'item'
+);
+
+// https://element-plus.org/zh-CN/guide/theming.html
+// https://blog.csdn.net/weixin_43951592/article/details/135814867
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  $colors: (
+    // 'primary': (
+    //   'base': #9333ea,
+    // ),
+    // 'success': (
+    //   'base': #21ba45,
+    // ),
+    // 'warning': (
+    //   'base': #f2711c,
+    // ),
+    // 'danger': (
+    //   'base': #db2828,
+    // ),
+    // 'error': (
+    //   'base': #db2828,
+    // ),
+    // 'info': (
+    //   'base': #42b8dd,
+    // ),
+  ),
+  // $button-padding-horizontal: (
+  //   'default': 80px,
+  // )
+);
