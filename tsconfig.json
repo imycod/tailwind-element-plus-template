@@ -1,0 +1,52 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": false,
+    "jsx": "preserve",
+    "importHelpers": true,
+    "experimentalDecorators": true,
+    "strictFunctionTypes": false,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "allowJs": false,
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "lib": ["ESNext", "DOM"],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@assets":["./src/assets/*"],
+      "@styles":["./src/styles/*"],
+      "@apis":["./src/apis/*"],
+      "@components":["./src/components/*"],
+      "@constants":["./src/constants/*"],
+      "@hooks":["./src/hooks/*"],
+      "@models":["./src/models/*"],
+      "@routers":["./src/routers/*"],
+      "@stores":["./src/stores/*"],
+      "@utils":["./src/utils/*"],
+      "@views":["./src/views/*"]
+    },
+    "types": [
+      "node",
+      "vite/client",
+      "element-plus/global",
+    ]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "types/*.d.ts",
+    "vite.config.ts",
+    "vite.analy.config.ts"
+  ],
+  "exclude": ["dist", "**/*.js", "node_modules"]
+}
