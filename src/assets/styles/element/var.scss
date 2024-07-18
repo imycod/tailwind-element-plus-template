@@ -28,4 +28,10 @@
   // $button-padding-horizontal: (
   //   'default': 80px,
   // )
+  // https://element-plus.org/zh-CN/guide/dark-mode.html
+  $bg-color: (
+    'page': #0a0a0a,
+    '': #21232B,
+    'overlay': #1d1e1f,
+  )
 );

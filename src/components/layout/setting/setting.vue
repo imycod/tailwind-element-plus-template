@@ -106,7 +106,7 @@ const getThemeColorStyle = computed(() => {
 });
 
 defineOptions({
-  name: "Setting"
+  name: "LaySetting"
 });
 </script>
 

@@ -7,7 +7,7 @@ import App from "./App.vue";
 import { injectResponsiveStorage } from "@/utils/responsive";
 import { getPlatformConfig } from "./config";
 
-import "@/assets/css/style.css";
+import "@/assets/styles/style.css";
 
 const app = createApp(App);
 

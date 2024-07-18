@@ -31,7 +31,7 @@ export default defineConfig((mode) => {
         imports: ["vue", "vue-router", "pinia", "@vueuse/core"],
         // https://juejin.cn/post/7189134329912492069
         include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/, /\.md$/],
-        dts: "./src/types/auto-imports.d.ts",
+        dts: "./types/auto-imports.d.ts",
         resolvers: [
           ElementPlusResolver({
             importStyle: "sass",

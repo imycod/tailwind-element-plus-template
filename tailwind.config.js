@@ -46,45 +46,6 @@ export default {
           900: "#124D79",
           950: "#0B324F",
         },
-        green: {
-          50: "#D2FFE2",
-          100: "#B1FDCD",
-          200: "#8BF0B0",
-          300: "#67E294",
-          400: "#4BD37D",
-          500: "#3EC972",
-          600: "#34BD68",
-          700: "#239F52",
-          800: "#15773A",
-          900: "#0F5429",
-          950: "#0A3F1E",
-        },
-        red: {
-          50: "#FFE8E8",
-          100: "#FFD1D1",
-          200: "#FFB2B2",
-          300: "#FF9494",
-          400: "#FF7474",
-          500: "#FF5656",
-          600: "#FA4949",
-          700: "#E63939",
-          800: "#C52727",
-          900: "#941818",
-          950: "#600F0F",
-        },
-        yellow: {
-          50: "#FFF2C9",
-          100: "#FFE7A0",
-          200: "#FFE081",
-          300: "#FFD968",
-          400: "#F7CD4C",
-          500: "#F0BB33",
-          600: "#DFAD2B",
-          700: "#BC9021",
-          800: "#816316",
-          900: "#4F3D0E",
-          950: "#342809",
-        },
         black:{
           50:'#333847',
           100:'#2B2F3B',
@@ -134,21 +95,14 @@ export default {
   },
   plugins: [
     forms,
-    // add custom variant for expanding sidebar
-    plugin(({ addVariant, e }) => {
-      addVariant("sidebar-expanded", ({ modifySelectors, separator }) => {
-        modifySelectors(
-          ({ className }) =>
-            `.sidebar-expanded .${e(
-              `sidebar-expanded${separator}${className}`
-            )}`
-        );
-      });
-    }),
     function ({ addBase }) {
       addBase({
-        ":root": {},
-        ":root.dark": {},
+        ":root":{
+          '--el-secondary-bg-color':'#fff',
+        },
+        ":root.dark": {
+          '--el-secondary-bg-color':'#000',
+        },
       });
     },
   ],

@@ -2,8 +2,11 @@ import {
   createRouter,
   createWebHistory,
   type RouteComponent,
+  type Router,
 } from "vue-router";
 
+import { usePermissionStoreHook } from "@/stores/modules/permission";
+import NProgress from "@/utils/progress";
 import { buildHierarchyTree } from "@/utils/tree.ts";
 
 import remainingRouter from "./modules/remaining";
@@ -39,7 +42,10 @@ export const constantMenus: Array<RouteComponent> = ascending(
   routes.flat(Infinity)
 ).concat(...remainingRouter);
 
-console.log('routes--',routes)
+/** 不参与菜单的路由 */
+export const remainingPaths = Object.keys(remainingRouter).map(v => {
+  return remainingRouter[v].path;
+});
 
 /** 重置路由 */
 export function resetRouter() {
@@ -59,6 +65,21 @@ export function resetRouter() {
 export const router = createRouter({
   history: routerHistory,
   routes,
+});
+
+router.beforeEach((to, _from, next) => {
+  NProgress.start();
+  // refresh
+  if (
+      usePermissionStoreHook().wholeMenus.length === 0 &&
+      to.path !== "/login"
+  ) {
+    initRouter()
+  }
+  next()
+})
+router.afterEach(() => {
+  NProgress.done();
 });
 
 export default router;
