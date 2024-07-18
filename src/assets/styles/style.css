@@ -4,6 +4,6 @@
 @import 'tailwindcss/components.css';
 
 /* Additional styles */
-@import 'additional-styles/utility-patterns.css';
+@import 'utility-patterns.css';
 
 @import 'tailwindcss/utilities.css';
