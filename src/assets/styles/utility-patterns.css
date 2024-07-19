@@ -1,3 +1,7 @@
+body {
+    @apply relative text-base font-normal text-gray-500 dark:text-white;
+}
+
 /* Typography */
 .h1 {
     @apply text-4xl font-extrabold tracking-tighter;

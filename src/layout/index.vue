@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import Sidebar from './Sidebar.vue'
+import { useDarkModeStore } from '@/stores/modules/dark-mode'
+
+import Sidebar from './ItemSidebar.vue'
 import Header from './Header.vue'
 
 defineOptions({
@@ -7,18 +9,23 @@ defineOptions({
 });
 
 const sidebarOpen = ref(false)
+const darkModeStore = useDarkModeStore()
+
+onMounted(()=>{
+  // darkModeStore.toggleDarkMode()
+})
 </script>
 
 <template>
   <div class="flex w-full h-screen overflow-hidden dark:bg-black-400">
     <!-- Sidebar -->
-    <Sidebar :sidebarOpen="sidebarOpen" @close-sidebar="sidebarOpen = false" v-if="false"/>
+    <Sidebar :sidebarOpen="sidebarOpen" @close-sidebar="sidebarOpen = false" />
 
     <!-- Content area -->
     <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
 
       <!-- Site header -->
-      <Header :sidebarOpen="sidebarOpen" @toggle-sidebar="sidebarOpen = !sidebarOpen" />
+      <Header variant="v2" :sidebarOpen="sidebarOpen" @toggle-sidebar="sidebarOpen = !sidebarOpen" />
 
       <div class="pure-container">
         <router-view v-slot="{ Component }">

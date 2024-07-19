@@ -18,12 +18,13 @@ const modules: Record<string, any> = import.meta.glob(
   }
 );
 
-/** 原始静态路由（未做任何处理） */
-const routes = [];
+/** 原始静态路由（未做任何处理）- 不可更改其结构 -> menu */
+export const routes = [];
 
 Object.keys(modules).forEach((key) => {
   routes.push(modules[key].default);
 });
+
 
 /** 不参与菜单的路由 */
 export const remainingPaths = Object.keys(remainingRouter).map(v => {

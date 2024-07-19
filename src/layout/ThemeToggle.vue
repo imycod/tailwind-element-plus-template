@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input type="checkbox" name="light-switch" id="light-switch" @change="changeTheme" v-model="isDark" class="light-switch sr-only" />
+    <input type="checkbox" name="light-switch" id="light-switch" @change="darkModeStore.toggleDarkMode" class="light-switch sr-only" />
     <label
       class="flex items-center justify-center cursor-pointer w-8 h-8 hover:bg-gray-100 lg:hover:bg-gray-200 dark:hover:bg-gray-700/50 dark:lg:hover:bg-gray-800 rounded-full"
       for="light-switch">
@@ -24,18 +24,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useDark } from "@vueuse/core";
-import useColors from "@/hooks/useColors.ts";
+import { useDarkModeStore } from '@/stores/modules/dark-mode'
 
-const isDark = useDark({
-  selector: 'html',
-});
-const [colors,setColors] = useColors()
-function changeTheme() {
-  if (isDark.value){
-    setColors(colors[0])
-  }else{
-    setColors(colors[1])
-  }
-}
+const darkModeStore = useDarkModeStore()
 </script>

@@ -4,20 +4,50 @@ const Layout = () => import("@/layout/index.vue");
 export default {
   path: "/",
   component: Layout,
-  redirect: "/dashboard",
-  meta: {
-    icon: "ep:home-filled",
-    title: "首页",
-    rank: 0
-  },
+  redirect: "/myProfile",
   children: [
     {
-      path: "/dashboard",
-      name: "dashboard",
+      path: "/myProfile",
+      name: "My Profile",
       component: () => import("@/views/dashboard/index.vue"),
       meta: {
-        title: "首页",
-      }
-    }
-  ]
+        icon: "UserCircle",
+      },
+    },
+    {
+      path: "/userList",
+      name: "User List",
+      component: () => import("@/views/dashboard/index.vue"),
+      meta: {
+        icon: "ListBullet",
+      },
+    },
+    {
+      path: "/activity",
+      name: "Activities",
+      component: () => import("@/views/dashboard/index.vue"),
+      meta: {
+        icon: "ArrowTrendingUp",
+      },
+    },
+    {
+      path: "/setting",
+      redirect: "/setting/department",
+      meta: {
+        icon: "Cog6Tooth",
+        bottom:true,
+      },
+      name: "Setting",
+      children: [
+        {
+          path: "/setting/department",
+          name: "Department",
+          component: () => import("@/views/dashboard/index.vue"),
+          meta: {
+       
+          },
+        },
+      ],
+    },
+  ],
 };

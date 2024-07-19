@@ -1,7 +1,11 @@
 <template>
   <div>
     <el-button @click="open" type="primary">对话框</el-button>
-    <el-dialog v-model="visible">visible</el-dialog> 
+    <el-dialog v-model="visible">
+      <span>asd</span>  
+    </el-dialog> 
+
+    <span>奥斯卡大奖</span>  
   </div>
 </template>
 

@@ -7,8 +7,8 @@
     <div
       id="sidebar"
       ref="sidebar"
-      class="flex lg:!flex flex-col absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 h-[100dvh] overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 lg:w-20 lg:sidebar-expanded:!w-64 2xl:!w-64 shrink-0 bg-white dark:bg-gray-800 p-4 transition-all duration-200 ease-in-out"
-      :class="[variant === 'v2' ?  'border-r border-gray-200 dark:border-gray-700/60' : 'rounded-r-2xl shadow-sm', sidebarOpen ? 'translate-x-0' : '-translate-x-64']"
+      class="flex lg:!flex flex-col absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 h-[100dvh] overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 lg:w-20 lg:sidebar-expanded:!w-64 2xl:!w-64 shrink-0 bg-white dark:bg-black-300 p-4 transition-all duration-200 ease-in-out"
+      :class="['rounded-r-2xl shadow-sm', sidebarOpen ? 'translate-x-0' : '-translate-x-64']"
     >
 
       <!-- Sidebar header -->
@@ -28,9 +28,7 @@
         </button>
         <!-- Logo -->
         <router-link class="block" to="/">
-          <svg class="fill-violet-500" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
-            <path d="M31.956 14.8C31.372 6.92 25.08.628 17.2.044V5.76a9.04 9.04 0 0 0 9.04 9.04h5.716ZM14.8 26.24v5.716C6.92 31.372.63 25.08.044 17.2H5.76a9.04 9.04 0 0 1 9.04 9.04Zm11.44-9.04h5.716c-.584 7.88-6.876 14.172-14.756 14.756V26.24a9.04 9.04 0 0 1 9.04-9.04ZM.044 14.8C.63 6.92 6.92.628 14.8.044V5.76a9.04 9.04 0 0 1-9.04 9.04H.044Z" />
-          </svg>
+          <div class="logo"></div>
         </router-link>
       </div>
 
@@ -816,10 +814,9 @@ import { useRouter } from 'vue-router'
 import SidebarLinkGroup from './SidebarLinkGroup.vue'
 
 export default {
-  name: 'RawSidebar',
+  name: 'ItemSidebar',
   props: [
     'sidebarOpen',
-    'variant'
   ],
   components: {
     SidebarLinkGroup,
@@ -878,4 +875,21 @@ export default {
     }
   },
 }
-</script>s
+</script>
+
+<style lang="scss" scoped>
+.logo{
+  width: 100px;
+  height: 50px;
+  background: url("@/assets/svg/logo.svg") no-repeat center;
+  background-size: contain;
+  background-position: center;
+}
+.dark{
+  .logo{
+    background: url("@/assets/svg/logo-dark.svg") no-repeat center;
+    background-size: contain;
+    background-position: center;
+  }
+}
+</style>
