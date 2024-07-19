@@ -98,10 +98,12 @@ export default {
     function ({ addBase }) {
       addBase({
         ":root":{
-          '--el-secondary-bg-color':'#fff',
+          '--item-secondary-bg-color':'#fff',
+          '--item-bg-color':'#fff',
         },
         ":root.dark": {
-          '--el-secondary-bg-color':'#000',
+          '--item-secondary-bg-color':'#21232B',
+          '--item-bg-color':'#21232B',
         },
       });
     },

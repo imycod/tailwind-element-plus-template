@@ -9,7 +9,7 @@ import compressPlugin from "vite-plugin-compression";
 import { themePreprocessorPlugin } from "@pureadmin/theme";
 import { genScssMultipleScopeVars } from "./src/components/layout/theme/index.ts";
 
-import baseConfig from "./vite.base.config";
+import baseConfig from "./baseConfig";
 
 // https://vitejs.dev/config/
 export default defineConfig((mode) => {

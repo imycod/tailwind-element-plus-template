@@ -136,7 +136,7 @@ onBeforeUnmount(() => {
 
 <style lang="scss" scoped>
 .sidebar-container{
-  background: var(--el-secondary-bg-color) !important;
+  background: var(--item-secondary-bg-color) !important;
 }
 :deep(.el-loading-mask) {
   opacity: 0.45;
