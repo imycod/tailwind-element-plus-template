@@ -6,8 +6,6 @@ import Components from "unplugin-vue-components/vite";
 import ElementPlus from "unplugin-element-plus/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import compressPlugin from "vite-plugin-compression";
-import { themePreprocessorPlugin } from "@pureadmin/theme";
-import { genScssMultipleScopeVars } from "./src/components/layout/theme/index.ts";
 
 import baseConfig from "./baseConfig";
 
@@ -48,13 +46,6 @@ export default defineConfig((mode) => {
             importStyle: "sass",
           }),
         ],
-      }),
-      // 自定义主题
-      themePreprocessorPlugin({
-        scss: {
-          multipleScopeVars: genScssMultipleScopeVars(),
-          extract: true,
-        },
       }),
     ],
     optimizeDeps: {

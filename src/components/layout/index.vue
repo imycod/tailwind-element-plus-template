@@ -1,26 +1,18 @@
 <script setup lang="ts">
-import Sidebar from './sidebar/index.vue'
-import Header from './raw/Header.vue'
-import { useGlobal } from "@pureadmin/utils";
-import { useDataThemeChange } from "./hooks/useDataThemeChange.ts";
-
-const sidebarOpen = ref(false)
-
-const { $storage } = useGlobal<any>();
+import Sidebar from './Sidebar.vue'
+import Header from './Header.vue'
 
 defineOptions({
   name: "Layout"
 });
 
-onBeforeMount(() => {
-  useDataThemeChange().dataThemeChange($storage.layout?.overallStyle);
-});
+const sidebarOpen = ref(false)
 </script>
 
 <template>
   <div class="flex w-full h-screen overflow-hidden dark:bg-black-400">
     <!-- Sidebar -->
-    <Sidebar :sidebarOpen="sidebarOpen" @close-sidebar="sidebarOpen = false" />
+    <Sidebar :sidebarOpen="sidebarOpen" @close-sidebar="sidebarOpen = false" v-if="false"/>
 
     <!-- Content area -->
     <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
