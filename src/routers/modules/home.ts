@@ -1,5 +1,5 @@
 const { VITE_HIDE_HOME } = import.meta.env;
-const Layout = () => import("@/components/layout/index.vue");
+const Layout = () => import("@/layout/index.vue");
 
 export default {
   path: "/",
@@ -20,4 +20,4 @@ export default {
       }
     }
   ]
-} satisfies RouteConfigsTable;
+};

@@ -1,4 +1,4 @@
-const Layout = () => import("@/components/layout/index.vue");
+const Layout = () => import("@/layout/index.vue");
 
 export default [
   // {
@@ -36,4 +36,4 @@ export default [
   //     title: "404"
   //   }
   // }
-] satisfies Array<RouteConfigsTable>;
+];

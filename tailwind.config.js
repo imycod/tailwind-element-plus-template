@@ -2,6 +2,9 @@ import plugin from "tailwindcss/plugin";
 import forms from "@tailwindcss/forms";
 
 export default {
+  // corePlugins: {
+  //   preflight: false
+  // },
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   darkMode: "class",
   theme: {
@@ -98,11 +101,8 @@ export default {
     function ({ addBase }) {
       addBase({
         ":root":{
-          '--item-secondary-bg-color':'#fff',
-          '--item-bg-color':'#fff',
         },
         ":root.dark": {
-          '--item-secondary-bg-color':'#21232B',
           '--item-bg-color':'#21232B',
         },
       });

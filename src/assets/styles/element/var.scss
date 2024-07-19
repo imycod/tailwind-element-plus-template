@@ -1,3 +1,11 @@
 @forward 'element-plus/theme-chalk/src/mixins/config.scss' with (
   $namespace: 'item'
 );
+
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  $colors: (
+     'primary': (
+       'base': #9333ea,
+     ),
+  )
+);
