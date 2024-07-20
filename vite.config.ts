@@ -27,6 +27,7 @@ export default defineConfig((mode) => {
       }),
       AutoImport({
         imports: ["vue", "vue-router", "pinia", "@vueuse/core"],
+        dirs:["src/utils/*","src/apis/*"],
         // https://juejin.cn/post/7189134329912492069
         include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/, /\.md$/],
         dts: "./types/auto-imports.d.ts",

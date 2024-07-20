@@ -1,4 +1,3 @@
-const { VITE_HIDE_HOME } = import.meta.env;
 const Layout = () => import("@/layout/index.vue");
 
 export default {
@@ -9,7 +8,7 @@ export default {
     {
       path: "/myProfile",
       name: "My Profile",
-      component: () => import("@/views/my-profile/index.vue"),
+      component: () => import("@/views/myProfile/index.vue"),
       meta: {
         icon: "UserCircle",
       },
@@ -17,7 +16,7 @@ export default {
     {
       path: "/userList",
       name: "User List",
-      component: () => import("@/views/user-list/index.vue"),
+      component: () => import("@/views/userList/index.vue"),
       meta: {
         icon: "ListBullet",
       },

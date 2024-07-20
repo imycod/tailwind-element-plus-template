@@ -33,6 +33,8 @@
     "path": "^0.12.7",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
+    "qs": "^6.12.3",
+    "radash": "^12.1.0",
     "responsive-storage": "^2.2.0",
     "vue": "^3.2.20",
     "vue-demi": "^0.14.8",
