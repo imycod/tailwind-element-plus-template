@@ -10,7 +10,7 @@
     "build:analy": "vite build --config vite.analy.config.ts",
     "i18n:json2table": "node ./src/locales/script/json2table.js",
     "i18n:table2json": "node ./src/locales/script/table2json.js",
-    "i18n:syncOnlineTable": "npm run i18n:table2json && npm run i18n:json2table"
+    "i18n:syncOnlineTable": "node ./src/locales/script/downloadFile.js && npm run i18n:table2json && npm run i18n:json2table"
   },
   "dependencies": {
     "@heroicons/vue": "^2.1.5",
@@ -26,6 +26,7 @@
     "chart.js": "^4.4.1",
     "chartjs-adapter-moment": "^1.0.1",
     "element-plus": "^2.7.7",
+    "exceljs": "^4.4.0",
     "flatpickr": "^4.6.13",
     "js-cookie": "^3.0.5",
     "mitt": "^3.0.1",
@@ -40,6 +41,7 @@
     "vue": "^3.2.20",
     "vue-demi": "^0.14.8",
     "vue-flatpickr-component": "^11.0.3",
+    "vue-i18n": "^9.13.1",
     "vue-router": "^4.2.5",
     "vue-tippy": "^6.4.4"
   },
