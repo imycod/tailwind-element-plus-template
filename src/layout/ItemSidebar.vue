@@ -8,19 +8,21 @@
     <!--    <div id="sidebar" ref="sidebar"-->
     <!--         class="flex lg:!flex p-0 flex-col absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 h-[100dvh] overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 lg:w-20 lg:sidebar-expanded:!w-64 2xl:!w-64 shrink-0 bg-white dark:bg-black-300 p-4 transition-all duration-200 ease-in-out"-->
     <!--         :class="['shadow-sm', sidebarOpen ? 'translate-x-0' : '-translate-x-64']">-->
-    <el-menu default-active="2" :collapse="isCollapse" class="item-layout-menu">
+    <el-menu router :collapse="isCollapse" class="item-layout-menu">
       <!-- <el-menu-item index="2" v-for="menu in topNav" :key="menu.path">
         <el-icon>
           <component :is="icon(menu.meta.icon)" class="w-[21px] h-[18px]" />
         </el-icon>
         <span>{{ menu.name }}</span>
       </el-menu-item> -->
-      <el-menu-item class="logo" index="0">
-        <img
-            style="width: 100px"
-            src="@/assets/svg/logo-dark.svg"
-            alt="Pass logo"
-        />
+      <el-menu-item class="!p-0" index="/">
+        <!--   lg:!bg-sky-400 sm:md:xs:bg-black-400-->
+        <div :class="isCollapse ?'s-logo': ['dark:logo','logo']" class="w-full h-full"></div>
+        <!--        <img-->
+        <!--            style="width: 100px"-->
+        <!--            src="@/assets/svg/logo-dark.svg"-->
+        <!--            alt="Pass logo"-->
+        <!--        />-->
       </el-menu-item>
       <div class="item-layout-menu-list">
         <div class="item-layout-menu-list-topNav">
@@ -107,7 +109,7 @@ function initMenu() {
 const isCollapse = ref(false)
 const {width} = useWindowSize()
 const stop = watchEffect(() => {
-  if (width.value < 1200) {
+  if (width.value < 1024) { // tailwind screens break point
     isCollapse.value = true
   } else {
     isCollapse.value = false
@@ -123,6 +125,12 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+.dark {
+  .logo {
+    background: url("@/assets/svg/logo-dark.svg") no-repeat !important;
+  }
+}
+
 .item-layout-menu {
   //--item-menu-bg-color: rgba(12, 32, 53, 0.7);
   //--item-menu-text-color:#fff;
@@ -132,24 +140,36 @@ onMounted(() => {
 
   .logo {
     margin-top: 20px;
+    background: url("@/assets/svg/logo.svg") no-repeat;
+    margin-left: 20px;
 
     &:hover {
-      background: none !important;
+      // remove border-radius for el-menu-item
+      //background: none !important;
     }
+  }
+
+  .s-logo {
+    background: red !important;
   }
 
   &-list {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: calc(100% - 80px);
-
+    height: calc(100% - 40px);
+    overflow-y: scroll;
+    // 重置滚动条样式
+    &::-webkit-scrollbar {
+      width: 2px;
+      height: 5px;
+    }
     &-topNav {
       margin-top: 30px;
     }
 
     &-bottomNav {
-
+      margin-bottom: 20px;
     }
 
   }
@@ -169,13 +189,18 @@ onMounted(() => {
     border-radius: 10px !important;
     //margin: 0px 10px; // el-menu wrapper not wrapper raw div
     //@apply md:relative;
-    .item-icon{
-    //  @apply sm:after:absolute -left-[10px] sm:after:w-full sm:after:h-full;
+    .item-icon {
+      //  @apply sm:after:absolute -left-[10px] sm:after:w-full sm:after:h-full;
       margin-right: 10px;
     }
+
     &:not(:last-child) {
       margin-bottom: 5px;
     }
+  }
+
+  .item-menu-item.is-active {
+    background: var(--item-menu-hover-bg-color);
   }
 
   &:not(.item-menu--collapse) {

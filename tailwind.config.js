@@ -3,6 +3,16 @@ import forms from "@tailwindcss/forms";
 const colors = {
     white: {
         DEFAULT: "#fff",
+        300:"#F2F2F7", // menu
+        400:"#F9F9F9",
+    },
+    black: {
+        50: "#333847",
+        100: "#2B2F3B",
+        200: "#23262F", // block card
+        300: "#21232B", // menu bar
+        400: "#1B1C23", // bg
+        500: "#121217",
     },
     gray: {
         50: "#F9FAFB",
@@ -43,14 +53,6 @@ const colors = {
         900: "#124D79",
         950: "#0B324F",
     },
-    black: {
-        50: "#333847",
-        100: "#2B2F3B",
-        200: "#23262F", // block card
-        300: "#21232B", // menu bar
-        400: "#1B1C23", // bg
-        500: "#121217",
-    },
 };
 
 export default {
@@ -80,10 +82,19 @@ export default {
                 "6xl": ["3.75rem", {lineHeight: "1.2", letterSpacing: "-0.02em"}],
             },
             screens: {
+                ...require('tailwindcss/defaultTheme').screens,
                 xs: "480px",
                 sm: "640px",
                 md: "768px",
                 lg: "1024px",
+
+                /**
+                 *     'phone': '480px',     // 定义一个名为 'phone' 的断点
+                 *       'tablet': '768px',    // 定义一个名为 'tablet' 的断点
+                 *       'laptop': '1024px',   // 定义一个名为 'laptop' 的断点
+                 *       'desktop': '1280px',  // 定义一个名为 'desktop' 的断点
+                 *       'wide': '1600px',     // 定义一个名为 'wide' 的断点
+                 */
             },
             borderWidth: {
                 3: "3px",
@@ -111,8 +122,8 @@ export default {
             addBase({
                 ":root": {
                     // "--item-fill-color-blank": colors.violet["800"],
-                    "--item-menu-bg-color": "red !important",
-                    "--item-menu-text-color": `${colors.white['DEFAULT']} !important`,
+                    "--item-menu-bg-color": `${colors.white[300]} !important`,
+                    "--item-menu-text-color": `${colors.gray[500]}`,
                     '--item-menu-hover-bg-color': 'rgba(22,120,255,0.2) !important',
                 },
                 ":root.dark": {

@@ -1,11 +1,12 @@
 <template>
   <div>
-    <el-button @click="open" type="primary">对话框</el-button>
+    <el-button @click="open"  plain type="primary">对话框</el-button>
     <el-dialog v-model="visible">
       <span>asd</span>  
-    </el-dialog> 
+    </el-dialog>
 
-    <span>奥斯卡大奖</span>  
+
+    <span>奥斯卡大奖 11</span>
   </div>
 </template>
 
