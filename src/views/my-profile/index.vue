@@ -1,23 +1,48 @@
 <template>
-  <div>
-    <el-button @click="open" type="primary">对话框</el-button>
-    <el-dialog v-model="visible">
-      <span>asd</span>
-    </el-dialog>
+  <div class="item-my-profile-layout">
+    <div class="item-my-profile-title">
+      <h1>My Profile</h1>
+      <span>Account No: A01002073</span>
+    </div>
 
-
-    <span>奥斯卡大奖 11</span>
+    <div class="item-my-profile-card">
+      <div class="card-info">
+        <div class="avatar"></div>
+        <div class="info"></div>
+      </div>
+      <more></more>
+    </div>
+    <div class="item-my-profile-card"></div>
   </div>
 </template>
 
 <script setup lang="ts">
-const visible = ref(false)
+import {addDialog} from "@/components/item-dialog/index.ts";
 
 function open() {
-  visible.value = true
+  addDialog({
+    title: 'xxx',
+    contentRenderer({options, index}) {
+      console.log(options)
+    },
+  })
 }
 </script>
 
 <style lang="scss" scoped>
-
+.item-my-profile-layout{
+  .item-my-profile-title{
+    @apply flex items-center;
+    h1{
+      @apply text-2xl font-bold;
+    }
+    > span{
+      margin-left: 10px;
+      @apply text-blue-600;
+    }
+  }
+  .item-my-profile-card {
+    @apply bg-secondary h-20 rounded-lg mt-5;
+  }
+}
 </style>

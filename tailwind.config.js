@@ -7,6 +7,7 @@ const colors = {
         400:"#F9F9F9",
     },
     black: {
+        DEFAULT:'#000',
         50: "#333847", // fill blank
         100: "#2B2F3B",
         200: "#23262F", // block card
@@ -65,6 +66,7 @@ export default {
         extend: {
             colors: {
                 ...colors,
+                secondary: 'var(--item-secondary-color)',
             },
             fontFamily: {
                 inter: ["Inter", "sans-serif"],
@@ -123,6 +125,7 @@ export default {
                 ":root": {
                     // "--item-fill-color-blank": colors.violet["800"],
                     "--item-menu-bg-color": `${colors.white[300]} !important`,
+                    "--item-secondary-color": `${colors.white[300]} !important`,
                     "--item-menu-text-color": `${colors.gray[500]}`,
                     '--item-menu-hover-bg-color': 'rgba(22,120,255,0.2) !important',
                 },
@@ -130,6 +133,7 @@ export default {
                     "--item-bg-color": colors.black[400], // overlay
                     "--item-text-color-regular": colors.white['DEFAULT'], // dialog > text
                     "--item-menu-bg-color": `${colors.black[300]} !important`,
+                    "--item-secondary-color": `${colors.black[300]} !important`,
                     '--item-border-color': colors.black[50],
                     '--item-text-color-primary': colors.white['DEFAULT'],
                     '--item-menu-active-color': colors.white['DEFAULT'],

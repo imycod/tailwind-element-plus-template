@@ -137,6 +137,7 @@ onMounted(() => {
   border-right: none;
   height: 100%;
   padding: 10px 10px;
+  @apply bg-secondary;
 
   .logo {
     margin-top: 20px;

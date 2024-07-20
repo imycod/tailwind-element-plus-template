@@ -1,5 +1,5 @@
 body {
-    @apply relative text-base font-normal text-gray-500 dark:text-white;
+    @apply relative text-base font-normal text-black dark:text-white;
 }
 /* Typography */
 .h1 {
