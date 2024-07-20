@@ -1,9 +1,5 @@
 // @ts-nocheck
-import { createI18n } from 'vue-i18n';
-import { storeToRefs } from 'pinia';
-import createPinia from '@stores/index.ts';
-import { useThemeStore } from '@stores/theme';
-
+import {createI18n} from 'vue-i18n';
 // 定义语言国际化内容
 
 /**
@@ -22,68 +18,88 @@ import esLocale from 'element-plus/es/locale/lang/es';
 import koLocale from 'element-plus/es/locale/lang/ko';
 import jaLocale from 'element-plus/es/locale/lang/ja';
 import arLocale from 'element-plus/es/locale/lang/ar';
+import {useAppStoreHook} from "@/stores/modules/app.ts";
 
 // 定义变量内容
 const messages = {};
 const element = {
-	en: enLocale,
-	zh: zhcnLocale,
-	tw: zhtwLocale,
-	es: esLocale,
-	ko: koLocale,
-	ja: jaLocale,
-	ar: arLocale,
+    en: enLocale,
+    zh: zhcnLocale,
+    tw: zhtwLocale,
+    es: esLocale,
+    ko: koLocale,
+    ja: jaLocale,
+    ar: arLocale,
 };
-const itemize = { en: [], zh: [], tw: [], es: [], ko: [], ja: [], ar: [] };
+const itemize = {en: [], zh: [], tw: [], es: [], ko: [], ja: [], ar: []};
 
-const langFiles = require.context('./', false, /\.json$/);
 const langModules = {};
-langFiles.keys().forEach((key) => {
-	const moduleName = key.replace(/^.\/(.*)\.\w+$/, '$1');
-	langModules[moduleName] = langFiles(key);
+
+function loadModule(files,modules) {
+    files.keys().forEach((key) => {
+        const moduleName = key.replace(/^.\/(.*)\.\w+$/, '$1');
+        modules[moduleName] = files(key);
+    });
+}
+
+// webpack
+// const langFiles = require.context('./', false, /\.json$/);
+// loadModule(langFiles,langModules)
+
+// vite
+const langFiles = import.meta.glob('./*.json', {eager: true});
+Object.entries(langFiles).forEach(([key, value]) => {
+    const moduleName = key.replace(/^.*\/(.*)\.json$/, '$1');
+    langModules[moduleName] = value;
 });
+// Object.entries(langFiles).forEach(([key, importer]) => {
+// 	const moduleName = key.replace(/\.\/(.*)\.json$/, '$1');
+// 	importer().then((module) => {
+// 		langModules[moduleName] = module.default || module;
+// 	});
+// });
 
 // 对自动引入的 modules 进行分类 en、zh、es
 // https://vitejs.cn/vite3-cn/guide/features.html#glob-import
 for (const key in langModules) {
-	if (itemize[key]) {
-		itemize[key].push(langModules[key]);
-	} else {
-		itemize[key] = langModules[key];
-	}
+    console.log(key)
+    if (itemize[key]) {
+        itemize[key].push(langModules[key]);
+    } else {
+        itemize[key] = langModules[key];
+    }
 }
+
+console.log('itemize---', itemize)
 
 // 合并数组对象（非标准数组对象，数组中对象的每项 key、value 都不同）
 function mergeArrObj(list, key) {
-	let obj = {};
-	list[key].forEach((i) => {
-		obj = Object.assign({}, obj, i);
-	});
-	return obj;
+    let obj = {};
+    list[key].forEach((i) => {
+        obj = Object.assign({}, obj, i);
+    });
+    return obj;
 }
 
 for (const key in itemize) {
-	console.log('messages---', messages);
-	messages[key] = {
-		name: key,
-		el: element[key].el,
-		...mergeArrObj(itemize, key),
-	};
+    console.log('messages---', messages);
+    messages[key] = {
+        name: key,
+        el: element[key].el,
+        ...mergeArrObj(itemize, key),
+    };
 }
 
-// 读取 pinia 默认语言
-const pinia = createPinia();
-const stores = useThemeStore(pinia);
-const { lang } = storeToRefs(stores);
+const itemApp = useAppStoreHook()
 
 // 导出语言国际化
 export const i18n = createI18n({
-	legacy: false,
-	silentTranslationWarn: true,
-	missingWarn: false,
-	silentFallbackWarn: true,
-	fallbackWarn: false,
-	locale: lang.value,
-	fallbackLocale: zhcnLocale.name,
-	messages,
+    legacy: false,
+    silentTranslationWarn: true,
+    missingWarn: false,
+    silentFallbackWarn: true,
+    fallbackWarn: false,
+    locale: itemApp.lang,
+    fallbackLocale: zhcnLocale.name,
+    messages,
 });

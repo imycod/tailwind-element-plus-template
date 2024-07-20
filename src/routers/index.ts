@@ -33,7 +33,7 @@ export const remainingPaths = Object.keys(remainingRouter).map(v => {
 
 export const router = createRouter({
   history: routerHistory,
-  routes,
+  routes:[...routes, ...remainingRouter],
 });
 
 router.beforeEach((to, _from, next) => {
