@@ -8,14 +8,14 @@
     <!--    <div id="sidebar" ref="sidebar"-->
     <!--         class="flex lg:!flex p-0 flex-col absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 h-[100dvh] overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 lg:w-20 lg:sidebar-expanded:!w-64 2xl:!w-64 shrink-0 bg-white dark:bg-black-300 p-4 transition-all duration-200 ease-in-out"-->
     <!--         :class="['shadow-sm', sidebarOpen ? 'translate-x-0' : '-translate-x-64']">-->
-    <el-menu router :collapse="isCollapse" class="item-layout-menu">
+    <el-menu router default-active="/myProfile" :collapse="isCollapse" class="item-layout-menu">
       <!-- <el-menu-item index="2" v-for="menu in topNav" :key="menu.path">
         <el-icon>
           <component :is="icon(menu.meta.icon)" class="w-[21px] h-[18px]" />
         </el-icon>
         <span>{{ menu.name }}</span>
       </el-menu-item> -->
-      <el-menu-item class="!p-0" index="/">
+      <el-menu-item class="!p-0 hover:!bg-transparent" index="/">
         <!--   lg:!bg-sky-400 sm:md:xs:bg-black-400-->
         <div :class="isCollapse ?'s-logo': ['dark:logo','logo']" class="w-full h-full"></div>
         <!--        <img-->
@@ -164,6 +164,7 @@ onMounted(() => {
       width: 2px;
       height: 5px;
     }
+
     &-topNav {
       margin-top: 30px;
     }
@@ -183,6 +184,9 @@ onMounted(() => {
         @apply sm:after:absolute -left-[10px] sm:after:w-full sm:after:h-full;
       }
     }
+    :deep(.item-sub-menu__icon-arrow){
+      display: none !important;
+    }
   }
 
   .item-menu-item, .item-sub-menu {
@@ -197,6 +201,10 @@ onMounted(() => {
     &:not(:last-child) {
       margin-bottom: 5px;
     }
+  }
+
+  .item-menu-item:hover, :deep(.item-sub-menu__title:hover) {
+    color:var(--item-menu-hover-text-color)
   }
 
   .item-menu-item.is-active {

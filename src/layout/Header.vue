@@ -37,16 +37,13 @@
 </template>
 
 <script lang="ts">
-import { ref } from 'vue'
-
 import ThemeToggle from './ThemeToggle.vue'
 import UserMenu from './DropdownProfile.vue'
 
 export default {
-  name: 'RawHeader',
+  name: 'Header',
   props: [
     'sidebarOpen',
-    'variant',
   ],
   components: {
     ThemeToggle,
