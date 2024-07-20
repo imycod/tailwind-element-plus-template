@@ -25,7 +25,7 @@
         leave-to-class="opacity-0"
     >
       <div v-show="dropdownOpen"
-           class="origin-top-right z-10 absolute top-full min-w-44 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700/60 py-1.5 rounded-lg shadow-lg overflow-hidden mt-1"
+           class="origin-top-right z-10 absolute top-full min-w-44 bg-white dark:bg-black-400 border border-gray-200 dark:border-gray-700/60 py-1.5 rounded-lg shadow-lg overflow-hidden mt-1"
            :class="align === 'right' ? 'right-0' : 'left-0'">
         <div class="pt-0.5 pb-2 px-3 mb-1 border-b border-gray-200 dark:border-gray-700/60" v-if="false"></div>
         <ul
@@ -35,6 +35,7 @@
         >
           <li>
             <div
+                @click="changePassword"
                 class="font-medium cursor-pointer dark:text-gray-300 text-sm hover:text-blue-600 dark:hover:text-violet-400 flex items-center py-1 px-3">
               Change Password
             </div>
@@ -51,9 +52,10 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import defaultAvartar from "@/assets/svg/system.svg"
-import {ref, onMounted, onUnmounted} from 'vue'
+import {addDialog} from "@/components/item-dialog/index.ts";
+import ChangePassword from "@/components/change-password/index.vue"
 
 export default {
   name: 'DropdownProfile',
@@ -90,11 +92,22 @@ export default {
       document.removeEventListener('click', clickHandler)
       document.removeEventListener('keydown', keyHandler)
     })
+    
+    function changePassword() {
+      addDialog({
+        title: 'Change Password',
+        contentRenderer:()=>h(ChangePassword),
+        props: {
+          title: 'Change Password',
+        },
+      })
+    }
 
     return {
       dropdownOpen,
       trigger,
       dropdown,
+      changePassword,
     }
   }
 }

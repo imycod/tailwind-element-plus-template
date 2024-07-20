@@ -7,7 +7,7 @@ const colors = {
         400:"#F9F9F9",
     },
     black: {
-        50: "#333847",
+        50: "#333847", // fill blank
         100: "#2B2F3B",
         200: "#23262F", // block card
         300: "#21232B", // menu bar
@@ -135,7 +135,10 @@ export default {
                     '--item-menu-active-color': colors.white['DEFAULT'],
                     '--item-menu-hover-text-color': colors.white['DEFAULT'],
                     '--item-menu-hover-bg-color': 'rgba(255,255,255,0.1) !important',
+                    "--item-input-text-color":colors.white['DEFAULT'],
+                    "--item-fill-color-blank":colors.black[50],
                     // "--item-menu-active-color":"#fff",
+                    // "--item-input-bg-color":'',
                 },
             });
         },
