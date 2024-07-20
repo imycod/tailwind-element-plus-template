@@ -26,7 +26,7 @@ export default defineConfig((mode) => {
         verbose: false, // boolean	true	是否在控制台中输出压缩结果
       }),
       AutoImport({
-        imports: ["vue", "vue-router", "pinia", "@vueuse/core"],
+        imports: ["vue", "vue-router", "pinia","@vueuse/core"],
         dirs:["src/utils/*","src/apis/*"],
         // https://juejin.cn/post/7189134329912492069
         include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/, /\.md$/],
@@ -49,6 +49,20 @@ export default defineConfig((mode) => {
         ],
       }),
     ],
+    // 服务端渲染
+    server: {
+      // 端口号
+      port: '9000',
+      host: "127.0.0.1",
+      proxy: {
+        '/api':{
+          target: env.VITE_BASE_URL, // 目标服务器地址
+          ws: false, // 是否启用 WebSocket
+          changeOrigin: true, // 是否修改请求头中的 Origin 字段
+          rewrite: (path) => path.replace('/api', ''),
+        }
+      },
+    },
     optimizeDeps: {
       include: ["@tailwindConfig"],
     },
