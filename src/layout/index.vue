@@ -25,12 +25,12 @@ onMounted(()=>{
     <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
 
       <!-- Site header -->
-      <Header variant="v2" :sidebarOpen="sidebarOpen" @toggle-sidebar="sidebarOpen = !sidebarOpen" />
+      <Header :sidebarOpen="sidebarOpen" @toggle-sidebar="sidebarOpen = !sidebarOpen" />
 
-      <div class="pure-container">
+      <div class="m-4">
         <router-view v-slot="{ Component }">
-          <transition name="fade">
-            <component :is="Component"></component>
+          <transition name="fade" mode="out-in">
+            <component :is="Component" :key="$route.path"></component>
           </transition>
         </router-view>
       </div>
@@ -44,7 +44,7 @@ onMounted(()=>{
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
-  transform: translateX(-60px);
+  transform: translateX(-100px);
 }
 
 .fade-enter-to,

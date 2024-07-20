@@ -9,7 +9,7 @@ export default {
     {
       path: "/myProfile",
       name: "My Profile",
-      component: () => import("@/views/dashboard/index.vue"),
+      component: () => import("@/views/my-profile/index.vue"),
       meta: {
         icon: "UserCircle",
       },
@@ -17,7 +17,7 @@ export default {
     {
       path: "/userList",
       name: "User List",
-      component: () => import("@/views/dashboard/index.vue"),
+      component: () => import("@/views/user-list/index.vue"),
       meta: {
         icon: "ListBullet",
       },
@@ -25,7 +25,7 @@ export default {
     {
       path: "/activity",
       name: "Activities",
-      component: () => import("@/views/dashboard/index.vue"),
+      component: () => import("@/views/activies/index.vue"),
       meta: {
         icon: "ArrowTrendingUp",
       },
@@ -42,7 +42,7 @@ export default {
         {
           path: "/setting/department",
           name: "Department",
-          component: () => import("@/views/dashboard/index.vue"),
+          component: () => import("@/views/setting/department/index.vue"),
           meta: {
        
           },
