@@ -19,7 +19,6 @@
 <script setup lang="ts">
 import {addDialog} from "@/components/item-dialog/index.ts";
 import {getTodos} from "@/apis/user.ts";
-import {retry} from "radash";
 
 function open() {
   addDialog({
@@ -32,8 +31,7 @@ function open() {
 
 onMounted(async ()=>{
  // const result = await retry({ times:10,delay:1000 },getTodos)
-  const result = await getTodos()
-  console.log(result)
+ //  const result = await getTodos()
 })
 </script>
 

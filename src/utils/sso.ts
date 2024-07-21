@@ -10,17 +10,16 @@ const moreInfo = {
 }
 const applicationCode = 'pass';
 
-export const tologin = async (body: LoginBody): Promise<LoginResponse> => {
+export const toLogin = async (body: LoginBody): Promise<LoginResponse> => {
     try {
         const result = await login({
             ...body,
             ...moreInfo,
             applicationCode,
         })
-        setToken(result)
         return result
     } catch (error) {
-
+        return error
     }
 }
 

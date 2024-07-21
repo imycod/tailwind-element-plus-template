@@ -7,6 +7,7 @@ import {
 
 import NProgress from "@/utils/progress";
 import remainingRouter from "./modules/remaining";
+import setupRootGuard from "@/routers/guard";
 
 
 const routerHistory = createWebHistory();
@@ -25,7 +26,6 @@ Object.keys(modules).forEach((key) => {
   routes.push(modules[key].default);
 });
 
-
 /** 不参与菜单的路由 */
 export const remainingPaths = Object.keys(remainingRouter).map(v => {
   return remainingRouter[v].path;
@@ -36,12 +36,5 @@ export const router = createRouter({
   routes:[...routes, ...remainingRouter],
 });
 
-router.beforeEach((to, _from, next) => {
-  NProgress.start();
-  next()
-})
-router.afterEach(() => {
-  NProgress.done();
-});
-
+setupRootGuard(router)
 export default router;

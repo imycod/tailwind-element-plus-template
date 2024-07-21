@@ -1,1 +1,1 @@
-export const getTodos = () => http.get("https://jsonplaceholder.typicode.com/todos/1");
+export const getUserInfo = () => http.get("/api/idm-app/user");

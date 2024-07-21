@@ -5,9 +5,18 @@ export default [
     component: () => import("@/views/login/index.vue"),
     meta: {
       title: "login",
-      showLink: false,
+      skipAuth:true,
     }
-  },
+  },{
+    path: "/accountProfile",
+    name: "accountProfile",
+    component: () => import("@/views/login/index.vue"),
+    meta: {
+      title: "Account Profile",
+      iframe:true,
+      skipAuth:true,
+    }
+  }
   // {
   //   path: "/redirect",
   //   component: Layout,

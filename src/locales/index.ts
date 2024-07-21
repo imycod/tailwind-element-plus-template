@@ -18,7 +18,7 @@ import esLocale from 'element-plus/es/locale/lang/es';
 import koLocale from 'element-plus/es/locale/lang/ko';
 import jaLocale from 'element-plus/es/locale/lang/ja';
 import arLocale from 'element-plus/es/locale/lang/ar';
-import {useAppStoreHook} from "@/stores/modules/app.ts";
+import {useLanguageStoreHook} from "@/stores/modules/language.ts";
 
 // 定义变量内容
 const messages = {};
@@ -62,15 +62,12 @@ Object.entries(langFiles).forEach(([key, value]) => {
 // 对自动引入的 modules 进行分类 en、zh、es
 // https://vitejs.cn/vite3-cn/guide/features.html#glob-import
 for (const key in langModules) {
-    console.log(key)
     if (itemize[key]) {
         itemize[key].push(langModules[key]);
     } else {
         itemize[key] = langModules[key];
     }
 }
-
-console.log('itemize---', itemize)
 
 // 合并数组对象（非标准数组对象，数组中对象的每项 key、value 都不同）
 function mergeArrObj(list, key) {
@@ -82,7 +79,6 @@ function mergeArrObj(list, key) {
 }
 
 for (const key in itemize) {
-    console.log('messages---', messages);
     messages[key] = {
         name: key,
         el: element[key].el,
@@ -90,7 +86,7 @@ for (const key in itemize) {
     };
 }
 
-const itemApp = useAppStoreHook()
+const store = useLanguageStoreHook()
 
 // 导出语言国际化
 export const i18n = createI18n({
@@ -99,7 +95,7 @@ export const i18n = createI18n({
     missingWarn: false,
     silentFallbackWarn: true,
     fallbackWarn: false,
-    locale: itemApp.lang,
+    locale: store.language,
     fallbackLocale: zhcnLocale.name,
     messages,
 });

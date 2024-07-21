@@ -1,13 +1,20 @@
 import Cookies from "js-cookie";
-import {storageLocal} from "@pureadmin/utils";
+import {storageLocal,storageSession} from "@pureadmin/utils";
 import {LoginResponse} from "@/utils/type.ts";
 
-const TokenKey = 'token'
-const userKey = 'userInfo'
+export const TokenKey = 'token'
+export const sortTokenKey = 'oAuthToken'
+export const authorizeTokenKey = 'authorizeToken'
+export const userKey = 'userInfo'
+
+export function getItem(key?:string) {
+    key = key || userKey;
+    return storageSession().getItem(key);
+}
 
 export function getToken() {
-	return Cookies.get(TokenKey)
-		? JSON.parse(Cookies.get(TokenKey))
+	return Cookies.get(sortTokenKey)
+		? JSON.parse(Cookies.get(sortTokenKey))
 		: storageLocal().getItem(userKey);
 }
 
@@ -18,11 +25,11 @@ export function setToken(data: LoginResponse) {
 
     const cookieString = JSON.stringify({accessToken, expires, oAuthToken});
 
-    Cookies.set(TokenKey, cookieString);
+    Cookies.set(sortTokenKey, cookieString);
 }
 
 export function removeToken() {
-    Cookies.remove(TokenKey);
+    Cookies.remove(sortTokenKey);
     storageLocal().removeItem(userKey);
 }
 

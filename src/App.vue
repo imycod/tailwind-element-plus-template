@@ -8,12 +8,12 @@
 
 <script setup lang="ts">
 import {ItemDialog} from "@/components/item-dialog/index.ts";
-import {useAppStoreHook} from "@/stores/modules/app.ts";
-const itemApp = useAppStoreHook()
+import {useLanguageStoreHook} from "@/stores/modules/language.ts";
+
+const langStore = useLanguageStoreHook()
 const getGlobalI18n = computed(() => {
-  return $i18n.global.messages[itemApp.lang];
+  return $i18n.global.messages[langStore.language];
 });
-console.log($i18n.global.messages)
 </script>
 
 <style lang="scss" scoped>
