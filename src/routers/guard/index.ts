@@ -5,9 +5,10 @@ import {createAuthGuard} from "@/routers/guard/createAuthGuard.ts";
 
 export default function setupRootGuard(router) {
     // global variable
+    let isInit = true
     console.log('setupRootGuard')
     createProgressGuard(router)
-    createStateGuard(router)
+    createStateGuard(router,isInit)
     createIFrameGuard(router)
     createAuthGuard(router)
 }

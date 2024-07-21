@@ -7,7 +7,6 @@ export function createIFrameGuard(router) {
         //     next()
         //     return
         // }
-        console.log('3')
         if (to.meta.iframe || isIframe()) {
             const userInfo = getItem()
             if (!isObject(userInfo)){
@@ -18,6 +17,7 @@ export function createIFrameGuard(router) {
                     next('/error/500')
                 }
             }
+            console.log('3')
         }
         next()
     });
