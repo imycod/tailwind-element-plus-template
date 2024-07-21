@@ -7,7 +7,8 @@ export function createStateGuard(router,isInit) {
             return
         }
         if (isInit){
-
+            // 清理缓存
+            // 初始化数据 比如header query数据
             console.log('2')
             isInit = false
         }

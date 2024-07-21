@@ -15,7 +15,7 @@
         </el-icon>
         <span>{{ menu.name }}</span>
       </el-menu-item> -->
-      <el-menu-item class="!p-0 hover:!bg-transparent" index="/">
+      <el-menu-item class="!p-0 logo-wrapper hover:!bg-transparent" index="/">
         <!--   lg:!bg-sky-400 sm:md:xs:bg-black-400-->
         <div :class="isCollapse ?'s-logo': ['dark:logo','logo']" class="w-full h-full"></div>
         <!--        <img-->
@@ -138,6 +138,11 @@ onMounted(() => {
   height: 100%;
   padding: 10px 10px;
   @apply bg-secondary;
+
+  .logo-wrapper.is-active{
+    //@apply bg-transparent;
+    background:transparent !important;
+  }
 
   .logo {
     margin-top: 20px;
