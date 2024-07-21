@@ -87,6 +87,7 @@ export const useUserStore = defineStore({
                     this.SET_COMPANY_FACILITY(companyFacility);
                     resolve(result);
                 } catch (error) {
+                    console.log('error',error)
                     reject(error);
                 }
             });

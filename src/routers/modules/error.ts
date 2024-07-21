@@ -22,5 +22,13 @@ export default {
         title: "404"
       }
     },
+    {
+      path: "/error/500",
+      name: "500",
+      component: () => import("@/views/error/500.vue"),
+      meta: {
+        title: "500"
+      }
+    },
   ]
 };

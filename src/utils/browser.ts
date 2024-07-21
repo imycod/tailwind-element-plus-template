@@ -1,5 +1,4 @@
-import * as Bowser from "bowser"
-
+import Bowser from "bowser"
 export const setProperty = (prop: string, val: string) => {
 	document.documentElement.style.setProperty(prop, val);
 }
