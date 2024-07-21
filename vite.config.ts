@@ -96,8 +96,14 @@ export default defineConfig((mode) => {
                             if (id.includes("chart.js")) {
                                 return "chart.js";
                             }
-                            if (id.includes("@vueuse")) {
-                                return "vueuse";
+                            if (id.includes("@vueuse/core")) {
+                                return "vueuse-core";
+                            }
+                            if (id.includes("radash")) {
+                                return "radash";
+                            }
+                            if (id.includes("@pureadmin/utils")) {
+                                return "pureadmin-utils";
                             }
                             if (id.includes("lodash-es")) {
                                 return "lodash-es";

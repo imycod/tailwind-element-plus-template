@@ -1,6 +1,6 @@
 import {remainingPaths} from "@/routers";
 
-export function createAuthGuard(router) {
+export function createAuthGuard(router,logger) {
     router.beforeEach(async (to, from, next) => {
         if (remainingPaths.includes(to.path)){
             next()

@@ -1,6 +1,5 @@
 <template>
    <el-config-provider :locale="getGlobalI18n" namespace="item">
-     {{getGlobalI18n}}
      <router-view />
      <item-dialog />
   </el-config-provider>
