@@ -5,6 +5,7 @@ import {createAuthGuard} from "@/routers/guard/createAuthGuard.ts";
 
 export default function setupRootGuard(router) {
     // global variable
+    console.log('setupRootGuard')
     createProgressGuard(router)
     createStateGuard(router)
     createIFrameGuard(router)

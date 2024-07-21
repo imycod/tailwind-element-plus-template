@@ -14,7 +14,7 @@ import NProgress from "../progress";
 import {getToken} from "@/utils/auth.ts";
 import {retry} from "radash"
 
-class CustomError extends Error {
+class CustomHttpError extends Error {
     constructor(message, statusCode) {
         super(message);
         this.statusCode = statusCode;
@@ -140,11 +140,12 @@ class IHttp {
                 }
                 const contentType = response.headers['content-type'];
                 const accept = $config.headers['Accept']
-
-                if (contentType && accept.includes(contentType)) {
-                    return response.data;
-                } else {
-                    throw new CustomError('接口返回类型错误', 50001);
+                if (!accept.includes('*/*')){
+                    if (contentType && accept.includes(contentType)) {
+                        return response.data;
+                    } else {
+                        throw new CustomHttpError('接口返回类型错误', 50001);
+                    }
                 }
                 return response.data;
             },
@@ -228,6 +229,6 @@ http.request = async (method, url, param, axiosConfig) => {
 
 export {
     http,
-    CustomError
+    CustomHttpError
 }
 

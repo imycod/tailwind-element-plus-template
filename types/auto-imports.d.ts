@@ -6,6 +6,7 @@
 export {}
 declare global {
   const CustomError: typeof import('../src/utils/http/index')['CustomError']
+  const CustomHttpError: typeof import('../src/utils/http/index')['CustomHttpError']
   const EffectScope: typeof import('vue')['EffectScope']
   const ElMessage: typeof import('element-plus/es')['ElMessage']
   const TokenKey: typeof import('../src/utils/auth')['TokenKey']
