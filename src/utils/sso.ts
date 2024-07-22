@@ -53,7 +53,7 @@ export const toAuth = async () => {
                 locale,
                 source, // my_item logo mark
                 ...parsed.query,
-            }, true)
+            })
         } else {
             // local
             return result

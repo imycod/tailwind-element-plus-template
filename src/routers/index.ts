@@ -37,7 +37,7 @@ initRemainingPaths()
 
 export const router = createRouter({
     history: routerHistory,
-    routes: [...routes, ...remainingRouter,errorRouter],
+    routes: [...routes, ...remainingRouter, errorRouter],
 });
 
 setupRootGuard(router)
