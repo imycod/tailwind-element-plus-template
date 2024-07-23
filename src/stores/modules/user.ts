@@ -1,20 +1,20 @@
 import {defineStore} from "pinia";
 // @ts-ignore
-import {storageSession} from "@pureadmin/utils"
 import {getUserInfo} from "@/apis/user";
-import {toLogin, toAuth} from "@/utils/sso.ts"
-import {setToken, removeToken, userKey, router, store} from "../utils";
+import {toLogin, toAuth, toLogout} from "@/utils/sso.ts"
+import {setToken, removeToken, store} from "../utils";
+import {setSessionItem,tokenKey} from "@/utils/auth.ts";
 
 export const useUserStore = defineStore({
     id: "item-user",
     state: () => ({
         username: "",
         roles: [],
-        permissions:[],
+        permissions: [],
         userId: "",
-        accountView:{},
-        userInfo:{},
-        companyFacility:{},
+        accountView: null,
+        userInfo: null,
+        companyFacility: {},
     }),
     actions: {
         /** 存储用户名 */
@@ -25,20 +25,20 @@ export const useUserStore = defineStore({
         SET_ROLES(roles: Array<string>) {
             this.roles = roles;
         },
-        SET_ACCOUNTVIEW(accountView:any){
+        SET_ACCOUNTVIEW(accountView: any) {
             this.accountView = accountView;
         },
-        SET_USERINFO(userInfo:any){
+        SET_USERINFO(userInfo: any) {
             this.userInfo = userInfo;
         },
-        SET_IDM_USERID(userId:string){
+        SET_IDM_USERID(userId: string) {
             this.userId = userId;
         },
-        SET_COMPANY_FACILITY(companyFacility:any){
+        SET_COMPANY_FACILITY(companyFacility: any) {
             this.companyFacility = companyFacility;
         },
         /** 登入 */
-        async loginByPassword(data) {
+        loginByPassword(data) {
             return new Promise(async (resolve, reject) => {
                 try {
                     const result = await toLogin(data)
@@ -50,19 +50,21 @@ export const useUserStore = defineStore({
             });
         },
         /** 前端登出（不调用接口） */
-        logOut() {
-            this.username = "";
-            this.roles = [];
-            removeToken();
-            router.push("/login");
+        logout() {
+            toLogout().finally(() => {
+                this.username = "";
+                this.roles = [];
+                removeToken();
+                redirectTo('/login')
+            })
         },
         /** sso/auth */
-        async authorize() {
+        authorize() {
             return new Promise(async (resolve, reject) => {
                 try {
                     const result = await toAuth()
-                    if (result){
-                        storageSession().setItem(TokenKey, result.accessToken)
+                    if (result) {
+                        setSessionItem(tokenKey, result.accessToken)
                         resolve(result)
                     }
                 } catch (error) {
@@ -87,7 +89,7 @@ export const useUserStore = defineStore({
                     this.SET_COMPANY_FACILITY(companyFacility);
                     resolve(result);
                 } catch (error) {
-                    console.log('error',error)
+                    console.log('error', error)
                     reject(error);
                 }
             });

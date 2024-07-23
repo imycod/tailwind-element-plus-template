@@ -101,14 +101,33 @@ const applicationMap:ApplicationMap = {
 		fav_icon: iconTransload
 	}
 }
+
+import iconGoogle from "@assets/img/google.png";
+
+export const LOGIN_MAP = {
+	GOOGLE: {
+		name: 'Google',
+		img: iconGoogle,
+	},
+	// FACEBOOK: {
+	// 	name: 'Facebook',
+	// 	img: require('@assets/img/facebook.png'),
+	// },
+	// TWITTER: {
+	// 	name: 'Twitter',
+	// 	img: require('@assets/img/twitter.png'),
+	// },
+};
+
 export default function useSignInConfig(){
-	function getApplicationConfig(code = 'pass') {
+	function getApplicationConfig() {
+		const route = useRoute()
+		const code = route.query.source || route.query.applicationCode || 'pass';
 		const config = applicationMap[code]
 		setMaskIcon(config.fav_icon)
 		document.title = 'Sign in to ' + config.text;
 		return config
 	}
-
 	function setMaskIcon(iconPath) {
 		const linkElement = document.querySelector("link[rel='mask-icon']");
 		if (linkElement) {

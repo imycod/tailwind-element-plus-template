@@ -1,0 +1,1 @@
+export const googleLogin = (data: any) => http.post(`/idm-app/user/google/login`, data);

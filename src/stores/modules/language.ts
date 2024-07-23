@@ -1,6 +1,6 @@
 import {store} from "@/stores";
 export const useLanguageStore = defineStore("language", () => {
-    const language = ref("zh");
+    const language = ref("en");
     const setLanguage = (val: string) => {
         language.value = val;
     };

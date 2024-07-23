@@ -42,6 +42,7 @@
           </li>
           <li>
             <div
+                @click="logout"
                 class="font-medium cursor-pointer dark:text-gray-300 text-sm hover:text-blue-600 dark:hover:text-violet-400 flex items-center py-1 px-3">
               Log Out
             </div>
@@ -55,6 +56,7 @@
 <script lang="ts">
 import defaultAvartar from "@/assets/svg/system.svg"
 import {addDialog} from "@/components/item-dialog/index.ts";
+import {useUserStoreHook} from "@/stores/modules/user.ts";
 import ChangePassword from "@/components/change-password/index.vue"
 
 export default {
@@ -92,22 +94,26 @@ export default {
       document.removeEventListener('click', clickHandler)
       document.removeEventListener('keydown', keyHandler)
     })
-    
+
     function changePassword() {
       addDialog({
         title: 'Change Password',
-        contentRenderer:()=>h(ChangePassword),
+        contentRenderer: () => h(ChangePassword),
         props: {
           title: 'Change Password',
         },
       })
     }
 
+    const userStore = useUserStoreHook()
+    const logout = userStore.logout()
+
     return {
       dropdownOpen,
       trigger,
       dropdown,
       changePassword,
+      logout,
     }
   }
 }

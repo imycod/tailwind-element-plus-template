@@ -1,39 +1,82 @@
 <script setup lang="ts">
-import useSignInConfig from './useSignInConfig.ts';
+import type {ComponentSize, FormInstance, FormRules} from 'element-plus'
+import useSignInConfig from './config.ts';
+import {useDarkModeStore} from "@/stores/modules/dark-mode.ts";
+import Logo from "@/views/login/components/logo.vue";
+import FooterContent from "@/views/login/components/footer.vue"
 
 const route = useRoute();
+// 登录页配置
+const {getApplicationConfig} = useSignInConfig();
+const config = getApplicationConfig();
+// 初始化dark mode
+useDarkModeStore()
+// 表单
+const form = reactive({
+  email: '',
+  password: '',
+})
 
-const { getApplicationConfig } = useSignInConfig();
-const code = route.query.source || route.query.applicationCode || 'pass';
-const config = getApplicationConfig(code);
+interface RuleForm {
+  email: string
+  password: string
+}
 
+const rules = reactive<FormRules<RuleForm>>({
+  email: [
+    {required: true, message: 'email is required', trigger: 'blur'},
+  ],
+  password: [
+    {required: true, message: 'password is required', trigger: 'blur'},
+  ],
+})
+
+function forgotPassword() {
+
+}
 </script>
 
 <template>
-  <div class="overflow-auto bg-[var(--Seller-Item-Black-400,_#1B1C23)] contents">
-    <div
-        class="flex items-center justify-center h-screen bg-[radial-gradient(76.55%_50.7%_at_50%_96.53%,_rgba(116,_71,_208,_0.20)_0%,_rgba(0,_0,_0,_0.00)_100%)]"
-    >
-      <div class="flex flex-shrink flex-col gap-6 w-min-[424px]">
-        <div class="flex flex-col justify-center items-center">
-          <div class="flex items-center">
-            <img
-                :src="config.src"
-                alt="logo"
-                class="h-[40px] m-auto hidden dark:block"
-            />
-          </div>
-          <div
-              class="mt-3 self-stretch text-center text-[24px] font-medium bg-[linear-gradient(275deg,_#D4B3FF_17.56%,_#E3D7F4_35.54%,_#FFF_79.2%)] bg-clip-text font-sans not-italic leading-[40px]"
-          >
-            {{ $t('Sign in to', [config.text]) }}
-          </div>
-        </div>
+  <div class="login-container">
+    <div class="wrapper">
+      <div class="contain">
+        <logo></logo>
+        <el-form class="w-full" :model="form" :rules="rules" hide-required-asterisk>
+          <el-form-item label-position="top" prop="email" label="Email">
+            <el-input v-model="form.email"></el-input>
+          </el-form-item>
+          <el-form-item label-position="top" prop="password" label="Password">
+            <el-input type="password" v-model="form.password" show-password></el-input>
+          </el-form-item>
+          <el-form-item>
+            <a
+                class="flex justify-end w-full text-purple-300 cursor-pointer text-xs"
+                @click="forgotPassword"
+            >
+              {{ $t('Forgot Your Password') }}
+            </a>
+          </el-form-item>
+          <el-form-item style="margin-bottom: 0px">
+            <el-button type="primary" size="large" class="w-full">
+              {{ $t('Sign In') }}
+            </el-button>
+          </el-form-item>
+        </el-form>
+        <footer-content />
       </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-
+.login-container {
+  @apply overflow-auto bg-[var(--Seller-Item-Black-400,_#1B1C23)] h-[100vh];
+  .wrapper {
+    @apply flex items-center justify-center h-screen w-full;
+    background-image: radial-gradient(76.55% 50.7% at 50% 96.53%, rgba(116, 71, 208, 0.20) 0%, rgba(0, 0, 0, 0.00) 100%);
+    .contain{
+      @apply flex flex-shrink flex-col gap-6 min-w-[424px] overflow-hidden;
+    }
+  }
+}
 </style>

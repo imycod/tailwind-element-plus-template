@@ -33,41 +33,14 @@ const element = {
 };
 const itemize = {en: [], zh: [], tw: [], es: [], ko: [], ja: [], ar: []};
 
-const langModules = {};
-
-function loadModule(files,modules) {
-    files.keys().forEach((key) => {
-        const moduleName = key.replace(/^.\/(.*)\.\w+$/, '$1');
-        modules[moduleName] = files(key);
-    });
-}
-
-// webpack
-// const langFiles = require.context('./', false, /\.json$/);
-// loadModule(langFiles,langModules)
-
 // vite
-const langFiles = import.meta.glob('./*.json', {eager: true});
-Object.entries(langFiles).forEach(([key, value]) => {
-    const moduleName = key.replace(/^.*\/(.*)\.json$/, '$1');
-    langModules[moduleName] = value;
-});
-// Object.entries(langFiles).forEach(([key, importer]) => {
-// 	const moduleName = key.replace(/\.\/(.*)\.json$/, '$1');
-// 	importer().then((module) => {
-// 		langModules[moduleName] = module.default || module;
-// 	});
-// });
-
-// 对自动引入的 modules 进行分类 en、zh、es
-// https://vitejs.cn/vite3-cn/guide/features.html#glob-import
-for (const key in langModules) {
-    if (itemize[key]) {
-        itemize[key].push(langModules[key]);
-    } else {
-        itemize[key] = langModules[key];
-    }
+const modules = import.meta.glob('./*.json', {eager: true});
+for (const path in modules) {
+    const key = path.match(/(\S+)\/(\S+).json/);
+    if (itemize[key![2]]) itemize[key![2]].push(modules[path].default);
+    else itemize[key![2]] = modules[path];
 }
+console.log('itemize---',itemize)
 
 // 合并数组对象（非标准数组对象，数组中对象的每项 key、value 都不同）
 function mergeArrObj(list, key) {

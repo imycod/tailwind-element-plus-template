@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "start": "npm run dev",
-    "dev": "cross-env NODE_ENV=development BASE_ENV=stage vite --mode dev --open",
+    "dev": "cross-env NODE_ENV=development BASE_ENV=development vite --mode dev --open",
     "build:stage:saas": "cross-env NODE_ENV=stage BASE_ENV=stage vite build --mode stage",
     "build:prod:saas": "cross-env NODE_ENV=production BASE_ENV=production vite build --mode prod",
     "build:analy": "vite build --config vite.analy.config.ts",

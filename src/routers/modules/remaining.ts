@@ -5,7 +5,6 @@ export default [
     component: () => import("@/views/login/index.vue"),
     meta: {
       title: "login",
-      skipAuth:true,
     }
   },{
     path: "/accountProfile",
