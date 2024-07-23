@@ -20,24 +20,21 @@ export function setSessionItem(key: string, value: any) {
 }
 
 export function getSessionItem(key) {
-    return  storageSession().getItem(key)
+    return storageSession().getItem(key)
 }
 
 export function getToken() {
     return Cookies.get(oAuthTokenKey)
         ? JSON.parse(Cookies.get(oAuthTokenKey))
-        : {
-            accessToken: '',
-            oAuthToken: '',
-        };
+        : null;
 }
 
 export function setToken(data: LoginResponse) {
-    const {accessToken, oAuthToken} = data;
+    const {oAuthToken} = data;
 
     const expires = 24 * 60 * 60 * 1000; // 一天过期
 
-    const cookieString = JSON.stringify({accessToken, expires, oAuthToken});
+    const cookieString = JSON.stringify({expires, oAuthToken});
 
     Cookies.set(oAuthTokenKey, cookieString);
 }

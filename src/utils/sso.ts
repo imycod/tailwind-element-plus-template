@@ -2,6 +2,7 @@ import {removeToken, getToken} from "@/utils/auth.ts";
 import {AuthResponse, LoginBody, LoginResponse} from "@/utils/type.ts";
 import {redirectTo} from "@/utils/navigation.ts";
 import {logout} from "@/apis/sso.ts";
+import {router} from "@/routers/index.ts"
 
 const USER_FROZEN = 46013;
 const NO_PERMISSION = 500;
@@ -17,17 +18,20 @@ export const toLogin = (body: LoginBody) => {
     return new Promise<LoginResponse>(async (resolve, reject) => {
         try {
             const result = await login({
-                ...body,
-                ...system,
-                applicationCode,
+                data:{
+                    ...body,
+                    ...system,
+                    applicationCode,
+                },
             })
             // 冻结去官网
-            if (result.code === USER_FROZEN) {
-                ElMessage.warning(result.error)
-                redirectTo('/error/403')
-            } else {
-                resolve(result)
-            }
+            // if (result.code === USER_FROZEN) {
+            //     ElMessage.warning(result.error)
+            //     redirectTo('/error/403')
+            // } else {
+            //     resolve(result)
+            // }
+            resolve(result)
         } catch (error) {
             // 是否冻结
             reject(error)
@@ -35,10 +39,10 @@ export const toLogin = (body: LoginBody) => {
     })
 }
 
-export const toAuth = () => {
-    const {accessToken} = getToken()
+export const toAuth = (token?:string) => {
+    const accessToken = token
 
-    const route = useRoute();
+    const route = useRoute() || router.currentRoute.value;
     const query = route.query;
     const code = query.applicationCode || 'pass';
 
@@ -46,7 +50,9 @@ export const toAuth = () => {
     return new Promise<AuthResponse>(async (resolve, reject) => {
         try {
             const result = await authorize({
-                ...system,
+                data:{
+                    ...system
+                },
             }, {
                 headers: {
                     'application-code': code,

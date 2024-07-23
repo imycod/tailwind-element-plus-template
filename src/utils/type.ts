@@ -3,12 +3,11 @@ export type LoginBody = {
     password: string,
 }
 
-export  interface LoginResponse {
-    accessToken: string,
+export  interface AuthResponse extends LoginResponse{
     oAuthToken: string,
 }
 
-export interface AuthResponse extends LoginResponse{
+export interface LoginResponse{
     idmUserId:string,
-    idmUserName:string,
+    accessToken:string,
 }

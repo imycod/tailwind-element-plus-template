@@ -16,26 +16,26 @@ const LOGIN_WITH_MAP = {
   GOOGLE: googleLogin
 }
 
-async function googleLogin() {
+function googleLogin() {
   loginWithGoogle()
       .then(googleLoginApi)
-      .then(async result=>{
+      .then(async result => {
         if (result.success) {
           setToken({
-            oAuthToken:result.oAuthToken,
-            accessToken:result.accessToken,
+            oAuthToken: result.oAuthToken,
+            accessToken: result.accessToken,
           })
           const resAuth = await toAuth()
-          if (resAuth){
+          if (resAuth) {
             // resAuth.oAuthToken
-            setSessionItem(tokenKey,result.accessToken)
+            setSessionItem(tokenKey, result.accessToken)
             redirectTo('/')
           }
         }
       })
 }
 
-const loginWith = (key) => LOGIN_WITH_MAP[key]
+const loginWith = (key) => LOGIN_WITH_MAP[key]()
 </script>
 
 <template>

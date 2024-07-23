@@ -107,7 +107,7 @@ class IHttp {
                                 }
                                 resolve(IHttp.retryOriginalRequest(config));
                             } else {
-                                config.headers["Authorization"] = data.token;
+                                config.headers["Authorization"] = data.oAuthToken;
                                 resolve(config);
                             }
                         } else {
@@ -140,7 +140,7 @@ class IHttp {
                 }
                 const contentType = response.headers['content-type'];
                 const accept = $config.headers['Accept']
-                if (!accept.includes('*/*')){
+                if (!accept.includes('*/*')) {
                     if (contentType && accept.includes(contentType)) {
                         return response.data;
                     } else {
@@ -173,6 +173,8 @@ class IHttp {
             ...param,
             ...axiosConfig
         } as IHttpRequestConfig;
+        resetRequest(IHttp.axiosInstance.request)
+        console.log('....config',config)
         // 单独处理自定义请求/响应回调
         return new Promise((resolve, reject) => {
             IHttp.axiosInstance
@@ -205,27 +207,27 @@ class IHttp {
     }
 }
 
-const http = new IHttp();
-
-const request = http.request;
-
-http.request = async (method, url, param, axiosConfig) => {
-    if (typeof param?.retry === 'boolean' && !param?.retry) {
-        return request(method, url, param, axiosConfig)
-    } else {
-        const retryConfig = param?.retry || {times: 10, delay: 1000}
-        return await retry(retryConfig, (exit) => {
+function resetRequest(request) {
+    return async (method, url, param, axiosConfig) => {
+        if (typeof axiosConfig?.retry === 'boolean' && !axiosConfig?.retry) {
             return request(method, url, param, axiosConfig)
-                .catch((error) => {
+        } else {
+            const retryConfig = axiosConfig?.retry || {times: 10, delay: 1000}
+            return await retry(retryConfig, (exit) => {
+                return request(method, url, param, axiosConfig)
+                    .catch((error) => {
 
-                    if (error.statusCode === 50001) {
-                        exit(error); // Stop retrying
-                    }
-                    throw error; // Continue retrying
-                })
-        })
+                        if (error.statusCode === 50001) {
+                            exit(error); // Stop retrying
+                        }
+                        throw error; // Continue retrying
+                    })
+            })
+        }
     }
 }
+
+const http = new IHttp();
 
 export {
     http,

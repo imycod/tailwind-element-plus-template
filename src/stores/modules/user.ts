@@ -3,7 +3,6 @@ import {defineStore} from "pinia";
 import {getUserInfo} from "@/apis/user";
 import {toLogin, toAuth, toLogout} from "@/utils/sso.ts"
 import {setToken, removeToken, store} from "../utils";
-import {setSessionItem,tokenKey} from "@/utils/auth.ts";
 
 export const useUserStore = defineStore({
     id: "item-user",
@@ -42,7 +41,6 @@ export const useUserStore = defineStore({
             return new Promise(async (resolve, reject) => {
                 try {
                     const result = await toLogin(data)
-                    setToken(result);
                     resolve(result);
                 } catch (error) {
                     reject(error);
@@ -59,14 +57,12 @@ export const useUserStore = defineStore({
             })
         },
         /** sso/auth */
-        authorize() {
+        authorize(data) {
             return new Promise(async (resolve, reject) => {
                 try {
-                    const result = await toAuth()
-                    if (result) {
-                        setSessionItem(tokenKey, result.accessToken)
-                        resolve(result)
-                    }
+                    const result = await toAuth(data.accessToken)
+                    setToken(result)
+                    resolve(result)
                 } catch (error) {
                     reject(error)
                 }
@@ -75,6 +71,7 @@ export const useUserStore = defineStore({
         async getUserInfo() {
             return new Promise(async (resolve, reject) => {
                 try {
+                    debugger
                     const result = await getUserInfo();
                     this.SET_ACCOUNTVIEW(result.accountView);
                     this.SET_IDM_USERID(result.accountView.idmUserId);

@@ -59,7 +59,7 @@ export default defineConfig((mode) => {
                     target: env.VITE_BASE_URL, // 目标服务器地址
                     ws: false, // 是否启用 WebSocket
                     changeOrigin: true, // 是否修改请求头中的 Origin 字段
-                    rewrite: (path) => path.replace('/api', ''),
+                    // rewrite: (path) => path.replace('/api', ''),
                 }
             },
         },
