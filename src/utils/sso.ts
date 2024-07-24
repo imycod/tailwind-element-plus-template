@@ -95,10 +95,8 @@ export function toLogout() {
         const {oAuthToken} = getToken()
         try {
             await logout({
-                data:{
-                    ...system,
-                    oauthToken: oAuthToken,
-                }
+                ...system,
+                oauthToken: oAuthToken,
             })
             resolve(true)
         } catch (error) {

@@ -86,6 +86,7 @@ class IHttp {
                     ? config
                     : new Promise(resolve => {
                         const data = getToken();
+                        console.log('lastClickTarget---',lastClickTarget)
                         if (data) {
                             const now = new Date().getTime();
                             const expired = parseInt(data.expires) - now <= 0;
@@ -147,10 +148,13 @@ class IHttp {
                         throw new CustomHttpError('接口返回类型错误', 50001);
                     }
                 }
+                lastClickTarget = null
                 return response.data;
             },
             (error: IHttpError) => {
                 const $error = error;
+                lastClickTarget = null
+                toLogger($error);
                 $error.isCancelRequest = Axios.isCancel($error);
                 // 关闭进度条动画
                 NProgress.done();
@@ -225,6 +229,20 @@ http.request = async (method, url, param, axiosConfig) => {
                 })
         })
     }
+}
+
+function toLogger(error) {
+    const response = error.response;
+    const data = {
+        path: response.config.url,
+        message: response.data.message || error.message,
+        status: response.status
+    }
+    console.log('data----',data);
+    const instance = IHttp.axiosInstance;
+    instance.post('/log/logger',{
+        data:JSON.stringify({value:'test'})
+    })
 }
 
 export {

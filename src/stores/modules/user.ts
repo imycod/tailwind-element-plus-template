@@ -50,12 +50,14 @@ export const useUserStore = defineStore({
         },
         /** 前端登出（不调用接口） */
         logout() {
-            toLogout().finally(() => {
+            toLogout().then(()=>{
                 this.username = "";
                 this.roles = [];
                 removeToken();
                 removeSession();
                 redirectTo('/login')
+            }).finally(() => {
+
             })
         },
         /** sso/auth */

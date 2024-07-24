@@ -8,11 +8,20 @@
 <script setup lang="ts">
 import {ItemDialog} from "@/components/item-dialog/index.ts";
 import {useLanguageStoreHook} from "@/stores/modules/language.ts";
+import {useLoggerStore} from "@/stores/modules/logger.ts";
 
 const langStore = useLanguageStoreHook()
 const getGlobalI18n = computed(() => {
   return $i18n.global.messages[langStore.language];
 });
+
+useEventListener('click',(event)=>{
+  useLoggerStore().toLog({
+    type: 'click',
+    event: event,
+    timestamp: new Date().getTime()
+  })
+})
 </script>
 
 <style lang="scss" scoped>
