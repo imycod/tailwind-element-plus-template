@@ -40,7 +40,6 @@ for (const path in modules) {
     if (itemize[key![2]]) itemize[key![2]].push(modules[path].default);
     else itemize[key![2]] = modules[path];
 }
-console.log('itemize---',itemize)
 
 // 合并数组对象（非标准数组对象，数组中对象的每项 key、value 都不同）
 function mergeArrObj(list, key) {

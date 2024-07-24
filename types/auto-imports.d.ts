@@ -119,6 +119,7 @@ declare global {
   const refDefault: typeof import('@vueuse/core')['refDefault']
   const refThrottled: typeof import('@vueuse/core')['refThrottled']
   const refWithControl: typeof import('@vueuse/core')['refWithControl']
+  const removeSession: typeof import('../src/utils/auth')['removeSession']
   const removeToken: typeof import('../src/utils/auth')['removeToken']
   const resolveComponent: typeof import('vue')['resolveComponent']
   const resolveRef: typeof import('@vueuse/core')['resolveRef']

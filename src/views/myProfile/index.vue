@@ -18,8 +18,6 @@
 
 <script setup lang="ts">
 import {addDialog} from "@/components/item-dialog/index.ts";
-import {getTodos} from "@/apis/user.ts";
-
 function open() {
   addDialog({
     title: 'xxx',

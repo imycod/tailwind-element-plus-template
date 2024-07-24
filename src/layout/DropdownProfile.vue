@@ -106,7 +106,7 @@ export default {
     }
 
     const userStore = useUserStoreHook()
-    const logout = userStore.logout()
+    const logout = userStore.logout
 
     return {
       dropdownOpen,

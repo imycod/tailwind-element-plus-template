@@ -76,6 +76,7 @@ export const toAuth = (token?:string) => {
                 resolve(result)
             }
         } catch (error) {
+            console.log('error---',error)
             if (error.response.status === NO_PERMISSION) {
                 // 没权限
                 redirectTo('/error/403')
@@ -94,8 +95,10 @@ export function toLogout() {
         const {oAuthToken} = getToken()
         try {
             await logout({
-                ...system,
-                oauthToken: oAuthToken,
+                data:{
+                    ...system,
+                    oauthToken: oAuthToken,
+                }
             })
             resolve(true)
         } catch (error) {

@@ -35,13 +35,16 @@ const rules = reactive<FormRules<RuleForm>>({
 const ruleFormRef = ref<FormInstance>()
 const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return
-  formEl.validate((valid) => {
+  formEl.validate(async (valid) => {
     if (valid) {
       const store = useUserStoreHook()
       store.loginByPassword(form)
           .then(store.authorize)
           .then(store.getUserInfo)
-      console.log('submit!')
+          .then(()=>{
+            console.log('submit!')
+            redirectTo('/')
+          })
     } else {
       console.log('error submit!')
     }

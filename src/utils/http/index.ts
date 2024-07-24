@@ -89,27 +89,27 @@ class IHttp {
                         if (data) {
                             const now = new Date().getTime();
                             const expired = parseInt(data.expires) - now <= 0;
-                            if (expired) {
-                                if (!IHttp.isRefreshing) {
-                                    IHttp.isRefreshing = true;
-                                    // token过期刷新
-                                    // useUserStoreHook()
-                                    //   .handRefreshToken({ refreshToken: data.refreshToken })
-                                    //   .then(res => {
-                                    //     const token = res.data.accessToken;
-                                    //     config.headers["Authorization"] = token;
-                                    //     IHttp.requests.forEach(cb => cb(token));
-                                    //     IHttp.requests = [];
-                                    //   })
-                                    //   .finally(() => {
-                                    //     IHttp.isRefreshing = false;
-                                    //   });
-                                }
-                                resolve(IHttp.retryOriginalRequest(config));
-                            } else {
+                            // if (expired) {
+                            //     if (!IHttp.isRefreshing) {
+                            //         IHttp.isRefreshing = true;
+                            //         // token过期刷新
+                            //         useUserStoreHook()
+                            //           .handRefreshToken({ refreshToken: data.refreshToken })
+                            //           .then(res => {
+                            //             const token = res.data.accessToken;
+                            //             config.headers["Authorization"] = token;
+                            //             IHttp.requests.forEach(cb => cb(token));
+                            //             IHttp.requests = [];
+                            //           })
+                            //           .finally(() => {
+                            //             IHttp.isRefreshing = false;
+                            //           });
+                            //     }
+                            //     resolve(IHttp.retryOriginalRequest(config));
+                            // } else {
                                 config.headers["Authorization"] = data.oAuthToken;
                                 resolve(config);
-                            }
+                            // }
                         } else {
                             resolve(config);
                         }
@@ -141,7 +141,7 @@ class IHttp {
                 const contentType = response.headers['content-type'];
                 const accept = $config.headers['Accept']
                 if (!accept.includes('*/*')) {
-                    if (contentType && accept.includes(contentType)) {
+                    if (contentType && contentType.includes(accept)) {
                         return response.data;
                     } else {
                         throw new CustomHttpError('接口返回类型错误', 50001);
@@ -173,8 +173,6 @@ class IHttp {
             ...param,
             ...axiosConfig
         } as IHttpRequestConfig;
-        resetRequest(IHttp.axiosInstance.request)
-        console.log('....config',config)
         // 单独处理自定义请求/响应回调
         return new Promise((resolve, reject) => {
             IHttp.axiosInstance
@@ -207,27 +205,27 @@ class IHttp {
     }
 }
 
-function resetRequest(request) {
-    return async (method, url, param, axiosConfig) => {
-        if (typeof axiosConfig?.retry === 'boolean' && !axiosConfig?.retry) {
-            return request(method, url, param, axiosConfig)
-        } else {
-            const retryConfig = axiosConfig?.retry || {times: 10, delay: 1000}
-            return await retry(retryConfig, (exit) => {
-                return request(method, url, param, axiosConfig)
-                    .catch((error) => {
+const http = new IHttp();
 
-                        if (error.statusCode === 50001) {
-                            exit(error); // Stop retrying
-                        }
-                        throw error; // Continue retrying
-                    })
-            })
-        }
+const request = http.request
+
+http.request = async (method, url, param, axiosConfig) => {
+    if (typeof axiosConfig?.retry === 'boolean' && !axiosConfig?.retry) {
+        return request(method, url, param, axiosConfig)
+    } else {
+        const retryConfig = axiosConfig?.retry || {times: 10, delay: 1000}
+        return await retry(retryConfig, (exit) => {
+            return request(method, url, param, axiosConfig)
+                .catch((error) => {
+
+                    if (error.statusCode === 50001) {
+                        exit(error); // Stop retrying
+                    }
+                    throw error; // Continue retrying
+                })
+        })
     }
 }
-
-const http = new IHttp();
 
 export {
     http,

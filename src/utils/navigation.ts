@@ -1,4 +1,5 @@
 import {isHttp} from "@/utils/utils.ts";
+import {router} from "@/routers"
 
 type RedirectOptions = {
     query?: any;
@@ -12,7 +13,7 @@ export function redirectTo(path: string, options?: RedirectOptions) {
         window.location.href = path
         return
     }
-    const router = useRouter()
+
     if (isReplace) {
         router.replace({
             path,

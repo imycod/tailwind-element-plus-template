@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import {storageLocal, storageSession} from "@pureadmin/utils";
-import {LoginResponse} from "@/utils/type.ts";
+import {AuthResponse, LoginResponse} from "@/utils/type.ts";
 
 export const tokenKey = 'token'
 export const oAuthTokenKey = 'oAuthToken'
@@ -22,17 +22,19 @@ export function setSessionItem(key: string, value: any) {
 export function getSessionItem(key) {
     return storageSession().getItem(key)
 }
-
-export function getToken() {
+export function removeSession() {
+    storageSession().clear()
+}
+export function getToken(): AuthResponse{
     return Cookies.get(oAuthTokenKey)
         ? JSON.parse(Cookies.get(oAuthTokenKey))
         : null;
 }
 
-export function setToken(data: LoginResponse) {
+export function setToken(data: AuthResponse) {
     const {oAuthToken} = data;
 
-    const expires = 24 * 60 * 60 * 1000; // 一天过期
+    const expires = new Date().getTime() + 24 * 60 * 60 * 1000; // 过期时间为当前时间 + 24 小时
 
     const cookieString = JSON.stringify({expires, oAuthToken});
 
