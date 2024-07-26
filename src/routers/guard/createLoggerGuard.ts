@@ -1,9 +1,13 @@
 import {routeTimes, logTimeOnPage} from "../log.ts"
+import { useLoggerStore } from "@/stores/modules/logger.ts";
 
 export function createLoggerGuard(router) {
     router.beforeEach((to, from, next) => {
         logTimeOnPage(from, to);
         const {entryTime, exitTime, timeSpent,error} = routeTimes[to.path];
+        useLoggerStore().toLogger({
+            scope:routeTimes
+        })
         // const redirectedFrom = to.redirectedFrom;
         // if (redirectedFrom){
         //     const redirectedFromLog = routeTimes[redirectedFrom.path] || {};

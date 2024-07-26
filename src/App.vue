@@ -16,9 +16,11 @@ const getGlobalI18n = computed(() => {
 });
 
 useEventListener('click',(event)=>{
-  useLoggerStore().toLog({
+  useLoggerStore().toLogger({
     type: 'click',
-    event: event,
+    target: event.target,
+    path: window.location.href,
+    targetName: event.target.innerText,
     timestamp: new Date().getTime()
   })
 })
