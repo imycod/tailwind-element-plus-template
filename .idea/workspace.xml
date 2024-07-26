@@ -36,7 +36,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/31700/Desktop/item-local/opera8-pass-web",
+    "last_opened_file_path": "C:/Users/31700/Desktop/item-local/item-pass-web",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -83,8 +83,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev:log" />
         <item itemvalue="npm.start" />
+        <item itemvalue="npm.dev:log" />
         <item itemvalue="npm.build:stage:saas" />
       </list>
     </recent_temporary>
@@ -98,7 +98,8 @@
       <option name="presentableId" value="Default" />
       <updated>1721537823401</updated>
       <workItem from="1721537827133" duration="7864000" />
-      <workItem from="1721784945059" duration="12861000" />
+      <workItem from="1721784945059" duration="12934000" />
+      <workItem from="1721812121654" duration="1786000" />
     </task>
     <servers />
   </component>

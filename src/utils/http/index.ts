@@ -12,7 +12,8 @@ import type {
 import {stringify} from "qs";
 import NProgress from "../progress";
 import {getToken} from "@/utils/auth.ts";
-import {retry} from "radash"
+import {isFunction, retry} from "radash"
+import {logger} from "./logger"
 
 class CustomHttpError extends Error {
     constructor(message, statusCode) {
@@ -72,7 +73,7 @@ class IHttp {
                 // 开启进度条动画
                 NProgress.start();
                 // 优先判断post/get等方法是否传入回调，否则执行初始化设置等回调
-                if (typeof config.beforeRequestCallback === "function") {
+                if (isFunction(config.beforeRequestCallback)) {
                     config.beforeRequestCallback(config);
                     return config;
                 }
@@ -86,7 +87,6 @@ class IHttp {
                     ? config
                     : new Promise(resolve => {
                         const data = getToken();
-                        console.log('lastClickTarget---',lastClickTarget)
                         if (data) {
                             const now = new Date().getTime();
                             const expired = parseInt(data.expires) - now <= 0;
@@ -131,7 +131,7 @@ class IHttp {
                 // 关闭进度条动画
                 NProgress.done();
                 // 优先判断post/get等方法是否传入回调，否则执行初始化设置等回调
-                if (typeof $config.beforeResponseCallback === "function") {
+                if (isFunction($config.beforeResponseCallback)) {
                     $config.beforeResponseCallback(response);
                     return response.data;
                 }
@@ -148,13 +148,15 @@ class IHttp {
                         throw new CustomHttpError('接口返回类型错误', 50001);
                     }
                 }
-                lastClickTarget = null
                 return response.data;
             },
             (error: IHttpError) => {
                 const $error = error;
-                lastClickTarget = null
-                toLogger($error);
+
+                if (process.env.LOGGER_SERVER_OPEN) {
+                    logger($error);
+                }
+                
                 $error.isCancelRequest = Axios.isCancel($error);
                 // 关闭进度条动画
                 NProgress.done();
@@ -211,39 +213,26 @@ class IHttp {
 
 const http = new IHttp();
 
-const request = http.request
+// const request = http.request
 
-http.request = async (method, url, param, axiosConfig) => {
-    if (typeof axiosConfig?.retry === 'boolean' && !axiosConfig?.retry) {
-        return request(method, url, param, axiosConfig)
-    } else {
-        const retryConfig = axiosConfig?.retry || {times: 10, delay: 1000}
-        return await retry(retryConfig, (exit) => {
-            return request(method, url, param, axiosConfig)
-                .catch((error) => {
+// http.request = async (method, url, param, axiosConfig) => {
+//     if (typeof axiosConfig?.retry === 'boolean' && !axiosConfig?.retry) {
+//         return request(method, url, param, axiosConfig)
+//     } else {
+//         const retryConfig = axiosConfig?.retry || {times: 10, delay: 1000}
+//         return await retry(retryConfig, (exit) => {
+//             return request(method, url, param, axiosConfig)
+//                 .catch((error) => {
 
-                    if (error.statusCode === 50001) {
-                        exit(error); // Stop retrying
-                    }
-                    throw error; // Continue retrying
-                })
-        })
-    }
-}
+//                     if (error.statusCode === 50001) {
+//                         exit(error); // Stop retrying
+//                     }
+//                     throw error; // Continue retrying
+//                 })
+//         })
+//     }
+// }
 
-function toLogger(error) {
-    const response = error.response;
-    const data = {
-        path: response.config.url,
-        message: response.data.message || error.message,
-        status: response.status
-    }
-    console.log('data----',data);
-    const instance = IHttp.axiosInstance;
-    instance.post('/log/logger',{
-        data:JSON.stringify({value:'test'})
-    })
-}
 
 export {
     http,

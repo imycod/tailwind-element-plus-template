@@ -1,7 +1,6 @@
 import { ref } from "vue";
 import itemDialog from "./index.vue";
 import { useTimeoutFn } from "@vueuse/core";
-import { withInstall } from "@pureadmin/utils";
 import type {
   EventType,
   ArgsType,
@@ -52,7 +51,7 @@ const closeAllDialog = () => {
 };
 
 
-const ItemDialog = withInstall(itemDialog);
+const ItemDialog = itemDialog;
 
 export type { EventType, ArgsType, DialogProps, ButtonProps, DialogOptions };
 export {

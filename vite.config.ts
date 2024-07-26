@@ -61,9 +61,9 @@ export default defineConfig((mode) => {
                     changeOrigin: true, // 是否修改请求头中的 Origin 字段
                     // rewrite: (path) => path.replace('/api', ''),
                 },
-                '/log':{
+                '/local':{
                     target: 'http://localhost:9002',
-                    rewrite: (path) => path.replace('/log', ''),
+                    rewrite: (path) => path.replace('/local', ''),
                 }
             },
         },
@@ -105,12 +105,6 @@ export default defineConfig((mode) => {
                             }
                             if (id.includes("radash")) {
                                 return "radash";
-                            }
-                            if (id.includes("@pureadmin/utils")) {
-                                return "pureadmin-utils";
-                            }
-                            if (id.includes("lodash-es")) {
-                                return "lodash-es";
                             }
                             if (id.includes("tailwindcss")) {
                                 return "tailwindcss";

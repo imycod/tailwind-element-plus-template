@@ -69,6 +69,7 @@ declare global {
   const isReadonly: typeof import('vue')['isReadonly']
   const isRef: typeof import('vue')['isRef']
   const lighten: typeof import('../src/utils/color-utils')['lighten']
+  const logger: typeof import('../src/utils/http/logger')['logger']
   const login: typeof import('../src/apis/sso')['login']
   const loginWithGoogle: typeof import('../src/utils/third-party-login')['loginWithGoogle']
   const logout: typeof import('../src/apis/sso')['logout']

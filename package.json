@@ -3,9 +3,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "npm run dev",
-    "dev:log": "npx nodemon ./log/main.js",
     "dev": "cross-env NODE_ENV=development BASE_ENV=development vite --mode dev --open",
+    "dev:log": "node ./script.js",
     "build:stage:saas": "cross-env NODE_ENV=stage BASE_ENV=stage vite build --mode stage",
     "build:prod:saas": "cross-env NODE_ENV=production BASE_ENV=production vite build --mode prod",
     "build:analy": "vite build --config vite.analy.config.ts",
@@ -18,7 +17,6 @@
     "@iconify-icons/ep": "^1.2.12",
     "@iconify-icons/ri": "^1.2.10",
     "@iconify/vue": "^4.1.2",
-    "@pureadmin/utils": "^2.4.7",
     "@tailwindcss/forms": "^0.5.7",
     "@vueuse/components": "^11.0.0-beta.2",
     "@vueuse/core": "^10.11.0",

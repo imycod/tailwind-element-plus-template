@@ -6,7 +6,7 @@ import {
   closeDialog,
   dialogStore
 } from "./index";
-import { isFunction } from "@pureadmin/utils";
+import { isFunction } from 'radash'
 import Fullscreen from "@iconify-icons/ri/fullscreen-fill";
 import ExitFullscreen from "@iconify-icons/ri/fullscreen-exit-fill";
 

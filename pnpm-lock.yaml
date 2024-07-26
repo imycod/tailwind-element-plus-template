@@ -17,9 +17,6 @@ dependencies:
   '@iconify/vue':
     specifier: ^4.1.2
     version: 4.1.2(vue@3.4.31)
-  '@pureadmin/utils':
-    specifier: ^2.4.7
-    version: 2.4.7(vue@3.4.31)
   '@tailwindcss/forms':
     specifier: ^0.5.7
     version: 0.5.7(tailwindcss@3.4.5)
@@ -553,20 +550,6 @@ packages:
 
   /@popperjs/core@2.11.8:
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
-    dev: false
-
-  /@pureadmin/utils@2.4.7(vue@3.4.31):
-    resolution: {integrity: sha512-fUHwZm9wEtcxUk//bs8xoDe0XYAeoU/FbvAF9CM4Y5xBmaaXvzN+sSFCUyUKC08q4tmCyaHBeLNolO3I4t3X6Q==}
-    peerDependencies:
-      echarts: '*'
-      vue: '*'
-    peerDependenciesMeta:
-      echarts:
-        optional: true
-      vue:
-        optional: true
-    dependencies:
-      vue: 3.4.31
     dev: false
 
   /@rollup/pluginutils@5.1.0:

@@ -9,7 +9,7 @@ export const useLoggerStore = defineStore('logger', () => {
             method: '', // 请求方法
             params: {}, // 请求参数
             status: '', // 请求状态
-        }] // 请求状态
+        }] 
     })
 
     const toLog = (options) => {
