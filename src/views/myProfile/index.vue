@@ -13,11 +13,14 @@
       <more></more>
     </div>
     <div class="item-my-profile-card"></div>
+
+    <div id="table"></div>
   </div>
 </template>
 
 <script setup lang="ts">
 import {addDialog} from "@/components/item-dialog/index.ts";
+import useTable from "@/hooks/useTable.ts"
 function open() {
   addDialog({
     title: 'xxx',
@@ -26,6 +29,33 @@ function open() {
     },
   })
 }
+
+useTable('#table',{
+  visible:true,
+  data:[{
+    id:1,
+    name:'张三',
+    age:18
+  },{
+    id:2,
+    name:'李四',
+    age:19
+  }],
+  column:[
+    {
+      title:'ID',
+      key:'id',
+    },
+    {
+      title:'姓名',
+      key:'name'
+    },
+    {
+      title:'年龄',
+      key:'age'
+    }
+  ]
+})
 
 onMounted(async ()=>{
  // const result = await retry({ times:10,delay:1000 },getTodos)

@@ -22,7 +22,7 @@ export const createVitePlugins = (viteEnv: ViteEnv): (PluginOption | PluginOptio
         }),
         AutoImport({
             imports: ["vue", "vue-router", "pinia", "@vueuse/core"],
-            dirs: ["src/utils/*", "src/apis/*"],
+            dirs: ["src/utils/*", "src/apis/*",'src/hooks/*'],
             // https://juejin.cn/post/7189134329912492069
             include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/, /\.md$/],
             dts: "../types/auto-imports.d.ts",
