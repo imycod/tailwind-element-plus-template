@@ -21,3 +21,21 @@ export function parseUrlSearch(url) {
         query: obj,
     };
 }
+
+export function getQueryString(url: string, paraName: string) {
+    const arrObj = url.split('?');
+    if (arrObj.length > 1) {
+        const arrPara = arrObj[1].split('&');
+        let arr;
+        for (let i = 0; i < arrPara.length; i++) {
+            arr = arrPara[i].split('=');
+            // eslint-disable-next-line eqeqeq
+            if (arr != null && arr[0] == paraName) {
+                return arr[1];
+            }
+        }
+        return '';
+    } else {
+        return '';
+    }
+}

@@ -4,14 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2a803644-a474-4ac5-a407-14ac66b9aec8" name="Changes" comment="feat: 移除质量中的环境变量">
-      <change afterPath="$PROJECT_DIR$/src/components/item-table/index.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hooks/useTable.ts" afterDir="false" />
+    <list default="true" id="2a803644-a474-4ac5-a407-14ac66b9aec8" name="Changes" comment="feat: 封装table">
+      <change afterPath="$PROJECT_DIR$/src/hooks/useTableHook.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/plugins.ts" beforeDir="false" afterPath="$PROJECT_DIR$/build/plugins.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routers/guard/createAuthGuard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/guard/createAuthGuard.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/myProfile/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/myProfile/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/setting/department/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/setting/department/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/styles/utility-patterns.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/utility-patterns.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/item-table/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/item-table/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/url-parser.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/url-parser.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/utils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,32 +48,32 @@
     <option name="openDirectoriesWithSingleClick" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "release",
-    "last_opened_file_path": "D:/code/item-workspace/tailwind-element-plus-template",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.build:stage:saas.executor": "Run",
-    "npm.dev:log.executor": "Run",
-    "npm.start.executor": "Run",
-    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Code With Me",
-    "ts.external.directory.path": "D:\\Program Files\\JetBrains\\WebStorm 2023.2.4\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;release&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/code/item-workspace/tailwind-element-plus-template&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.build:stage:saas.executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev:log.executor&quot;: &quot;Run&quot;,
+    &quot;npm.start.executor&quot;: &quot;Run&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Code With Me&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\Program Files\\JetBrains\\WebStorm 2023.2.4\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "vue.recent.templates": [
-      "Vue Composition API Component"
+  &quot;keyToStringList&quot;: {
+    &quot;vue.recent.templates&quot;: [
+      &quot;Vue Composition API Component&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="npm.dev">
     <configuration name="build:stage:saas" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
@@ -134,7 +138,8 @@
       <workItem from="1722064260597" duration="5000" />
       <workItem from="1722089704586" duration="47000" />
       <workItem from="1722090410299" duration="1717000" />
-      <workItem from="1722092976928" duration="3035000" />
+      <workItem from="1722092976928" duration="3703000" />
+      <workItem from="1722117977382" duration="2295000" />
     </task>
     <task id="LOCAL-00001" summary="feat: 移除质量中的环境变量">
       <option name="closed" value="true" />
@@ -144,7 +149,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722062778576</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="feat: 封装table">
+      <option name="closed" value="true" />
+      <created>1722096094904</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1722096094904</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -152,6 +165,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat: 移除质量中的环境变量" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 移除质量中的环境变量" />
+    <MESSAGE value="feat: 封装table" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 封装table" />
   </component>
 </project>

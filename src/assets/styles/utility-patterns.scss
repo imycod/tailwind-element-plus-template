@@ -1,6 +1,7 @@
 body {
     @apply relative text-base font-normal text-black dark:text-white;
 }
+
 /* Typography */
 .h1 {
     @apply text-4xl font-extrabold tracking-tighter;
@@ -57,12 +58,14 @@ input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration {
-  -webkit-appearance: none;
+    -webkit-appearance: none;
 }
-input:focus{
+
+input:focus {
     box-shadow: none !important;
 }
-input{
+
+input {
     background: none !important;
 }
 
@@ -138,10 +141,41 @@ input{
 
 /* Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 .no-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.item-custom-table.item-table.item-table--border {
+    border: 1px solid;
+    @apply border-gray-500 dark:border-black-100 rounded-lg;
+    
+    td {
+        @apply dark:bg-black-400 border-b border-solid border-gray-500 dark:border-black-100;
+    }
+    
+    &:after,
+    .item-table__inner-wrapper::before {
+        @apply bg-gray-100 dark:bg-black-100;
+    }
+    
+    & th.item-table__cell.is-leaf {
+        height: 52px;
+        border-bottom: 1px solid;
+        @apply dark:bg-black-200 border-gray-500 dark:border-black-400;
+        
+        .cell {
+            @apply text-gray-400;
+        }
+    }
+    
+    .item-table__cell {
+        border-right: none;
+        .cell {
+            @apply dark:text-white text-gray-500;
+        }
+    }
 }

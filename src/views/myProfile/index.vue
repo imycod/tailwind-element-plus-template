@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 import {addDialog} from "@/components/item-dialog/index.ts";
-import useTable from "@/hooks/useTable.ts"
+import {useTable} from "@/hooks/useTable.ts"
 function open() {
   addDialog({
     title: 'xxx',
@@ -30,7 +30,8 @@ function open() {
   })
 }
 
-useTable('#table',{
+const {addTable}= useTable({})
+addTable('#table',{
   visible:true,
   data:[{
     id:1,
@@ -56,7 +57,6 @@ useTable('#table',{
     }
   ]
 })
-
 onMounted(async ()=>{
  // const result = await retry({ times:10,delay:1000 },getTodos)
  //  const result = await getTodos()

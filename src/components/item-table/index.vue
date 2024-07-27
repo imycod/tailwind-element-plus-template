@@ -21,13 +21,46 @@ const props = defineProps({
 
 <template>
   <el-config-provider namespace="item">
-    <el-table v-if="visible" :data="data">
-      <el-table-column v-for="(item, index) in column" :type="item.type" :key="index" :prop="item.key" :label="item.title">
-      </el-table-column>
-    </el-table>
+    <div>
+      <el-table class="item-custom-table" border v-if="visible" :data="data">
+        <el-table-column v-for="(item, index) in column" :type="item.type" :key="index" :prop="item.key"
+                         :label="item.title">
+        </el-table-column>
+      </el-table>
+    </div>
   </el-config-provider>
 </template>
 
 <style scoped lang="scss">
+:deep(.item-table.item-table--border) {
+  //border: 1px solid;
+  //@apply border-gray-500 dark:border-black-100 rounded-lg;
+  border: 1px solid red !important;
+  td {
+    //@apply dark:bg-black-400 border-b border-solid border-gray-500 dark:border-black-100;
+  }
 
+  &:after,
+  .item-table__inner-wrapper::before {
+    //@apply bg-gray-100 dark:bg-black-100;
+  }
+
+  & th.item-table__cell.is-leaf {
+    height: 52px;
+    //border-bottom: 1px solid;
+    //@apply dark:bg-black-200 border-gray-500 dark:border-black-400;
+
+    .cell {
+      //@apply text-gray-400;
+    }
+  }
+
+  .item-table__cell {
+    //border-right: none;
+
+    .cell {
+      //@apply dark:text-white text-gray-500;
+    }
+  }
+}
 </style>

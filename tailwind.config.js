@@ -128,6 +128,10 @@ export default {
                     "--item-secondary-color": `${colors.white[300]} !important`,
                     "--item-menu-text-color": `${colors.gray[500]}`,
                     '--item-menu-hover-bg-color': 'rgba(22,120,255,0.2) !important',
+                    "--item-fill-color-light":`${colors.gray[100]}`,
+                    '--item-table-border-color':'',
+                    '--item-border-color-lighter':'',
+                    '--item-table-tr-bg-color':colors.white
                 },
                 ":root.dark": {
                     "--item-bg-color": colors.black[400], // overlay
@@ -141,6 +145,9 @@ export default {
                     '--item-menu-hover-bg-color': 'rgba(255,255,255,0.1) !important',
                     "--item-input-text-color":colors.white['DEFAULT'],
                     "--item-fill-color-blank":colors.black[50],
+                    "--item-fill-color-light":colors.black[300],
+                    '--item-table-border-color':colors.black[50],
+                    '--item-border-color-lighter':colors.black[50],
                     // "--item-menu-active-color":"#fff",
                     // "--item-input-bg-color":'',
                 },

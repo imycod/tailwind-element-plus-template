@@ -1,5 +1,7 @@
 <script setup lang="ts">
-useTable('#table',{
+import {useTable} from "@/hooks/useTable.ts"
+const {addTable} = useTable({})
+addTable('#table',{
   visible: true,
   data: [
     {

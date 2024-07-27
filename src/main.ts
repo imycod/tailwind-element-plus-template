@@ -7,7 +7,7 @@ import { i18n } from '@/locales';
 
 import ItemMore from "@/components/item-more/index.vue"
 
-import "@/assets/styles/style.css";
+import "@/assets/styles/style.scss";
 
 const app = createApp(App);
 app.component('more',ItemMore)
