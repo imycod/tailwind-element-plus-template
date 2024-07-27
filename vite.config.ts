@@ -1,54 +1,24 @@
 import {defineConfig, loadEnv} from "vite";
-import vue from "@vitejs/plugin-vue";
-
-import AutoImport from "unplugin-auto-import/vite";
-import Components from "unplugin-vue-components/vite";
-import ElementPlus from "unplugin-element-plus/vite";
-import {ElementPlusResolver} from "unplugin-vue-components/resolvers";
-import compressPlugin from "vite-plugin-compression";
-
-import baseConfig from "./baseConfig";
+import {
+    alias,
+    __APP_INFO__,
+    manualChunks,
+} from "./build/utils";
+import {createVitePlugins} from "./build/plugins.ts";
 
 // https://vitejs.dev/config/
-export default defineConfig((mode) => {
-    const env = loadEnv(mode.mode, process.cwd());
-    console.log(env);
+export default defineConfig(({mode}) => {
+    const root = process.cwd();
+    const env = loadEnv(mode, root);
     return {
-        ...baseConfig,
+        resolve: {
+            alias
+        },
         define: {
             "process.env": process.env,
+            __APP_INFO__: JSON.stringify(__APP_INFO__)
         },
-        plugins: [
-            vue(),
-            compressPlugin({
-                threshold: 3072, //3KB 仅压缩文件大小大于此阈值的文件
-                deleteOriginFile: true, // 是否删除原始文件
-                verbose: false, // boolean	true	是否在控制台中输出压缩结果
-            }),
-            AutoImport({
-                imports: ["vue", "vue-router", "pinia", "@vueuse/core"],
-                dirs: ["src/utils/*", "src/apis/*"],
-                // https://juejin.cn/post/7189134329912492069
-                include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/, /\.md$/],
-                dts: "./types/auto-imports.d.ts",
-                resolvers: [
-                    ElementPlusResolver({
-                        importStyle: "sass",
-                    }),
-                ],
-            }),
-            // ElementPlus({
-            //   useSource: true,
-            // }),
-            Components({
-                resolvers: [
-                    // https://blog.csdn.net/weixin_43951592/article/details/135814867
-                    ElementPlusResolver({
-                        importStyle: "sass",
-                    }),
-                ],
-            }),
-        ],
+        plugins: createVitePlugins(env),
         // 服务端渲染
         server: {
             // 端口号
@@ -61,7 +31,7 @@ export default defineConfig((mode) => {
                     changeOrigin: true, // 是否修改请求头中的 Origin 字段
                     // rewrite: (path) => path.replace('/api', ''),
                 },
-                '/local':{
+                '/local': {
                     target: 'http://localhost:9002',
                     rewrite: (path) => path.replace('/local', ''),
                 }
@@ -77,41 +47,16 @@ export default defineConfig((mode) => {
                 },
             },
         },
+        esbuild: {
+            drop: mode === 'dev' ? [] : ['console','debugger'],
+        },
         build: {
             commonjsOptions: {
                 transformMixedEsModules: true,
             },
             rollupOptions: {
                 output: {
-                    manualChunks: (id) => {
-                        if (id.includes("node_modules")) {
-                            if (id.includes("element-plus")) {
-                                return "element-plus";
-                            }
-                            if (id.includes("vue")) {
-                                return "vue";
-                            }
-                            if (id.includes("vue-router")) {
-                                return "vue-router";
-                            }
-                            if (id.includes("pinia")) {
-                                return "pinia";
-                            }
-                            if (id.includes("chart.js")) {
-                                return "chart.js";
-                            }
-                            if (id.includes("@vueuse/core")) {
-                                return "vueuse-core";
-                            }
-                            if (id.includes("radash")) {
-                                return "radash";
-                            }
-                            if (id.includes("tailwindcss")) {
-                                return "tailwindcss";
-                            }
-                            return "vendor";
-                        }
-                    },
+                    manualChunks,
                 },
             },
         },

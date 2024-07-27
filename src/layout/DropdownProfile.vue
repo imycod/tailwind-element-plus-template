@@ -102,6 +102,9 @@ export default {
         props: {
           title: 'Change Password',
         },
+        beforeCancel(){
+          ElMessage.warning('测试文字')
+        }
       })
     }
 

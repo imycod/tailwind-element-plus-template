@@ -62,6 +62,9 @@ input[type="search"]::-webkit-search-results-decoration {
 input:focus{
     box-shadow: none !important;
 }
+input{
+    background: none !important;
+}
 
 .form-input,
 .form-textarea,
