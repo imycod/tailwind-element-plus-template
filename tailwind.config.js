@@ -18,12 +18,12 @@ function hexToRgb(hex) {
 
 const colors = {
 	white: {
-		DEFAULT: "#fff",
+		DEFAULT: "#ffffff",
 		300: "#F2F2F7", // menu
 		400: "#F9F9F9",
 	},
 	black: {
-		DEFAULT: '#000',
+		DEFAULT: '#000000',
 		50: "#333847", // fill blank
 		100: "#2B2F3B",
 		200: "#23262F", // block card
@@ -57,19 +57,6 @@ const colors = {
 		900: "#2F227C",
 		950: "#1C1357",
 	},
-	sky: {
-		50: "#E3F3FF",
-		100: "#D1ECFF",
-		200: "#B6E1FF",
-		300: "#A0D7FF",
-		400: "#7BC8FF",
-		500: "#67BFFF",
-		600: "#56B1F3",
-		700: "#3193DA",
-		800: "#1C71AE",
-		900: "#124D79",
-		950: "#0B324F",
-	},
 };
 
 export default {
@@ -78,6 +65,11 @@ export default {
 	// },
 	content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
 	darkMode: "class",
+	variants: {
+		extend: {
+			borderColor: ['dark'],
+		},
+	},
 	theme: {
 		extend: {
 			colors: {
@@ -138,6 +130,8 @@ export default {
 		forms,
 		function ({addBase, addUtilities, config}) {
 			const darkMaskColor = hexToRgb(colors.black["500"]);
+			const menuBgHoverColor = hexToRgb(colors.white.DEFAULT);
+			const darkPrimaryColor = colors.black[300];
 			addBase({
 				":root": {
 					// "--item-fill-color-blank": colors.violet["800"],
@@ -148,22 +142,24 @@ export default {
 					"--item-fill-color-light": `${colors.gray[100]}`,
 					'--item-table-border-color': '',
 					'--item-border-color-lighter': '',
-					'--item-table-tr-bg-color': colors.white
+					'--item-table-tr-bg-color': colors.white,
+					'--item-popper-border-color': colors.white.DEFAULT,
 				},
 				":root.dark": {
+					'--item-popper-border-color': `${colors.black[100]}`,
 					'--item-bg-color-overlay': colors.black[400],
 					"--item-bg-color": colors.black[400], // overlay
-					"--item-text-color-regular": colors.white['DEFAULT'], // dialog > text
-					"--item-menu-bg-color": `${colors.black[300]} !important`,
-					"--item-secondary-color": `${colors.black[300]} !important`,
+					"--item-text-color-regular": colors.white.DEFAULT, // dialog > text
+					"--item-menu-bg-color": `${darkPrimaryColor} !important`,
+					"--item-secondary-color": `${darkPrimaryColor} !important`,
 					'--item-border-color': colors.black[50],
-					'--item-text-color-primary': colors.white['DEFAULT'],
-					'--item-menu-active-color': colors.white['DEFAULT'],
-					'--item-menu-hover-text-color': colors.white['DEFAULT'],
-					'--item-menu-hover-bg-color': 'rgba(255,255,255,0.1) !important',
-					"--item-input-text-color": colors.white['DEFAULT'],
+					'--item-text-color-primary': colors.white.DEFAULT,
+					'--item-menu-active-color': colors.white.DEFAULT,
+					'--item-menu-hover-text-color': colors.white.DEFAULT,
+					'--item-menu-hover-bg-color':`rgba(${menuBgHoverColor[0]},${menuBgHoverColor[1]},${menuBgHoverColor[2]},0.1) !important`,
+					"--item-input-text-color": colors.white.DEFAULT,
 					"--item-fill-color-blank": colors.black[50],
-					"--item-fill-color-light": colors.black[300],
+					"--item-fill-color-light": darkPrimaryColor,
 					'--item-table-border-color': colors.black[50],
 					'--item-border-color-lighter': colors.black[50],
 					'--item-mask-color': `rgba(${darkMaskColor[0]},${darkMaskColor[1]},${darkMaskColor[2]},0.9)`, // https://gist.github.com/danmatthews/f6ea70c3a1ef6348b38a5bd79ac1f6dd

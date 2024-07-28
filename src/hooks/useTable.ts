@@ -1,5 +1,5 @@
-import { CellStyle, ElMessage } from 'element-plus';
-import {toUnderline,downBlobFile as downBlobFileUtil} from "@/utils/utils.ts";
+import {CellStyle, ElMessage} from 'element-plus';
+import {toUnderline, downBlobFile as downBlobFileUtil} from "@/utils/utils.ts";
 import {h, onMounted, onUnmounted, ref, render} from "vue";
 import TableComponent from "@/components/item-table/index.vue";
 
@@ -63,7 +63,20 @@ export interface Pagination {
 }
 
 export function useTable(options?: BasicTableProps) {
-	const defaultOptions: { createdIsNeed: boolean; pagination: Pagination; queryForm: {}; loading: boolean; dataListSelections: any[]; ascs: any[]; props: { item: string; totalCount: string }; selectObjs: any[]; descs: any[]; dataListLoading: boolean; dataList: any[]; isPage: boolean } = {
+	const defaultOptions: {
+		createdIsNeed: boolean;
+		pagination: Pagination;
+		queryForm: {};
+		loading: boolean;
+		dataListSelections: any[];
+		ascs: any[];
+		props: { item: string; totalCount: string };
+		selectObjs: any[];
+		descs: any[];
+		dataListLoading: boolean;
+		dataList: any[];
+		isPage: boolean
+	} = {
 		// 列表数据是否正在加载中，默认为false
 		dataListLoading: false,
 		// 是否需要自动请求创建接口来获取表格数据，默认为true
@@ -144,7 +157,7 @@ export function useTable(options?: BasicTableProps) {
 				// 设置表格展示的数据数组
 				state.dataList = state.isPage ? res.data[state.props.item] : res.data;
 				// 处理合并
-				if (state.spanMethod){
+				if (state.spanMethod) {
 					state.spanMethod()
 				}
 				// 设置分页信息中的总数据条数
@@ -241,18 +254,39 @@ export function useTable(options?: BasicTableProps) {
 	 * @returns  css
 	 */
 	const tableStyle: TableStyle = {
-		cellStyle: { textAlign: 'center' },
+		cellStyle: {textAlign: 'center'},
 		headerCellStyle: {
 			textAlign: 'center',
 			background: 'var(--item-table-row-hover-bg-color)',
 			color: 'var(--item-text-color-primary)',
 		},
-		rowStyle: { textAlign: 'center' },
+		rowStyle: {textAlign: 'center'},
 	};
 
 	const addTable = (el, {data, visible, column}) => {
-
 		const container = ref(null);
+		const currentPage = ref(5);
+		const pageSize = ref(10);
+
+		/**
+		 * 视图没有更新的问题可能出在几个方面，以下是一些可能的原因和解决方案：
+		 * Reactivity Issues: Vue的响应式系统可能没有正确追踪某些变量的变化。确保currentPage和pageSize是响应式的，并且它们的变化能被Vue正确地检测到。
+		 * VNode重新渲染: 每次currentPage或pageSize改变时，Vue需要重新渲染VNode。确保在addTable函数中使用h和render函数创建和渲染VNode时，Vue能正确追踪这些响应式变量。
+		 * Component Props: 确保传递给TableComponent的props是响应式的，并且TableComponent正确地使用了这些props。
+		 */
+		const renderTable = () => {
+			const vNode = h(TableComponent, {
+				data,
+				visible,
+				column,
+				currentPage: currentPage.value,
+				// https://play.vuejs.org/
+				"onUpdate:currentPage": (val) => 	currentPage.value = val,
+				pageSize: pageSize.value,
+				"onUpdate:pageSize": (val) => pageSize.value = val,
+			});
+			render(vNode, container.value);
+		};
 
 		onMounted(() => {
 			const targetEl = document.querySelector(el);
@@ -264,8 +298,7 @@ export function useTable(options?: BasicTableProps) {
 			container.value = document.createElement('div');
 			document.body.appendChild(container.value);
 
-			const vNode = h(TableComponent, {data, visible, column});
-			render(vNode, container.value);
+			watch([currentPage, pageSize], renderTable, { immediate: true });
 
 			targetEl.appendChild(container.value);
 		});

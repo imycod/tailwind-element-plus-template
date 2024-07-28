@@ -20,7 +20,7 @@ const props = defineProps({
     type: String,
     default: 'small'
   },
-  current:{
+  current: {
     type: Number,
     default: 1
   },
@@ -38,34 +38,53 @@ const props = defineProps({
   },
   sizeChange: {
     type: Function,
-    default: () => {}
+    default: () => {
+    }
   },
   currentChange: {
     type: Function,
-    default: () => {}
+    default: () => {
+    }
+  },
+  currentPage:{
+    type: Number,
+    default: 1
+  },
+  pageSize: {
+    type: Number,
+    default: 10
   }
 })
+const currentPage = defineModel('currentPage',{
+    type: Number,
+    default: 1
+})
+const pageSize = defineModel('pageSize',{
+  type: Number,
+  default: 10
+})
 
-const currentPage = ref(1)
-const pageSize = ref(10)
+// const emit = defineEmits(['update:currentPage','update:pageSize'])
+// const currentPage = useVModel(props,'currentPage',emit)
+// const pageSize = useVModel(props,'pageSize',emit)
 </script>
 
 <template>
   <el-config-provider namespace="item">
     <div>
+      {{ currentPage }} / {{ pageSize }}
       <el-table class="item-custom-table" border v-if="visible" :data="data">
         <el-table-column v-for="(item, index) in column" :type="item.type" :key="index" :prop="item.key"
                          :label="item.title">
         </el-table-column>
       </el-table>
       <el-pagination
-          v-if="total"
           v-model:current-page="currentPage"
           v-model:page-size="pageSize"
           :page-sizes="[100, 200, 300, 400]"
           :disabled="disabled"
           :background="background"
-          layout="total, sizes, prev, pager, next, jumper"
+          layout="sizes, prev, pager, next"
           :total="400"
           @size-change="sizeChange"
           @current-change="currentChange"
@@ -79,6 +98,7 @@ const pageSize = ref(10)
   //border: 1px solid;
   //@apply border-gray-500 dark:border-black-100 rounded-lg;
   border: 1px solid red !important;
+
   td {
     //@apply dark:bg-black-400 border-b border-solid border-gray-500 dark:border-black-100;
   }

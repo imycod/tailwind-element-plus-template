@@ -34,7 +34,7 @@ const resetQuery = () => {
   <div>
     <el-table
         :data="state.dataList"
-        v-loading="true"
+        v-loading="state.loading"
         @selection-change="handleSelectionChange"
         border
         class="item-custom-table"
