@@ -137,7 +137,7 @@ export default {
 	plugins: [
 		forms,
 		function ({addBase, addUtilities, config}) {
-			const darkMaskColor = hexToRgb(colors.black[200]);
+			const darkMaskColor = hexToRgb(colors.black["500"]);
 			addBase({
 				":root": {
 					// "--item-fill-color-blank": colors.violet["800"],
@@ -166,7 +166,7 @@ export default {
 					"--item-fill-color-light": colors.black[300],
 					'--item-table-border-color': colors.black[50],
 					'--item-border-color-lighter': colors.black[50],
-					'--item-mask-color': `rgba(${darkMaskColor[0]},${darkMaskColor[1]},${darkMaskColor[2]},0.5)`, // https://gist.github.com/danmatthews/f6ea70c3a1ef6348b38a5bd79ac1f6dd
+					'--item-mask-color': `rgba(${darkMaskColor[0]},${darkMaskColor[1]},${darkMaskColor[2]},0.9)`, // https://gist.github.com/danmatthews/f6ea70c3a1ef6348b38a5bd79ac1f6dd
 					// "--item-menu-active-color":"#fff",
 					// "--item-input-bg-color":'',
 				},

@@ -164,10 +164,10 @@ input {
 
 //
 .item-select__popper.item-popper{
-	@apply dark:border-black-100 !important;
+	@apply dark:border-black-100;
 }
 .item-popper__arrow,.item-popper__arrow:before,.item-popper__arrow:after{
-	@apply dark:border-black-100 !important;
+	@apply dark:border-black-100;
 }
 
 // remove global table style
