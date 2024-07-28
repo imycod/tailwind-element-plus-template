@@ -12,8 +12,6 @@ export const __APP_INFO__ = {
     pkg: {name, version, dependencies, devDependencies},
     lastBuildTime: dayjs(new Date()).format("YYYY-MM-DD HH:mm:ss")
 };
-
-
 const pathResolve = (dir = ".", metaUrl = import.meta.url) => {
     // 当前文件目录的绝对路径
     const currentFileDir = dirname(fileURLToPath(metaUrl));
@@ -29,8 +27,6 @@ const pathResolve = (dir = ".", metaUrl = import.meta.url) => {
     // 不在 build 目录内，返回解析后的绝对路径
     return resolvedPath;
 };
-
-
 export const alias = {
     '@': pathResolve('../src'),
     '@tailwindConfig': pathResolve('../tailwind.config.js'),
@@ -47,7 +43,6 @@ export const alias = {
     '@utils': pathResolve('../src/utils'),
     '@views': pathResolve('../src/views'),
 }
-
 export const manualChunks = (id: string) => {
     if (id.includes("node_modules")) {
         if (id.includes("element-plus")) {

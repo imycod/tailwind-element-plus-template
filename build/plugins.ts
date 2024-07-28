@@ -5,7 +5,7 @@ import Components from "unplugin-vue-components/vite";
 import ElementPlus from "unplugin-element-plus/vite";
 import {ElementPlusResolver} from "unplugin-vue-components/resolvers";
 import compressPlugin from "vite-plugin-compression";
-
+import { vitePluginFakeServer } from "vite-plugin-fake-server";
 /**
  * 创建 vite 插件
  * @param viteEnv
@@ -66,5 +66,12 @@ export const createVitePlugins = (viteEnv: ViteEnv): (PluginOption | PluginOptio
         //         }
         //     }
         // },
+        // mock支持
+        vitePluginFakeServer({
+            logger: false,
+            include: "mock",
+            infixName: false,
+            enableProd: false
+        }),
     ]
 }

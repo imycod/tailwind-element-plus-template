@@ -1,5 +1,5 @@
 import {setProperty} from "@/utils/browser.ts";
-import {darken, lighten} from "@/utils/color-utils.ts";
+import {darken, lighten} from "@/utils/color-utils";
 
 export default function useColors() {
     const colors = ['#9333ea','#409EFF']

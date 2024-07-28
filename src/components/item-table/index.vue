@@ -15,8 +15,39 @@ const props = defineProps({
   column: {
     type: Array,
     default: () => []
+  },
+  size: {
+    type: String,
+    default: 'small'
+  },
+  current:{
+    type: Number,
+    default: 1
+  },
+  total: {
+    type: Number,
+    default: 0
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  background: {
+    type: Boolean,
+    default: false
+  },
+  sizeChange: {
+    type: Function,
+    default: () => {}
+  },
+  currentChange: {
+    type: Function,
+    default: () => {}
   }
 })
+
+const currentPage = ref(1)
+const pageSize = ref(10)
 </script>
 
 <template>
@@ -27,6 +58,18 @@ const props = defineProps({
                          :label="item.title">
         </el-table-column>
       </el-table>
+      <el-pagination
+          v-if="total"
+          v-model:current-page="currentPage"
+          v-model:page-size="pageSize"
+          :page-sizes="[100, 200, 300, 400]"
+          :disabled="disabled"
+          :background="background"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="400"
+          @size-change="sizeChange"
+          @current-change="currentChange"
+      />
     </div>
   </el-config-provider>
 </template>

@@ -1,32 +1,32 @@
 body {
-    @apply relative text-base font-normal text-black dark:text-white;
+	@apply relative text-base font-normal text-black dark:text-white;
 }
 
 /* Typography */
 .h1 {
-    @apply text-4xl font-extrabold tracking-tighter;
+	@apply text-4xl font-extrabold tracking-tighter;
 }
 
 .h2 {
-    @apply text-3xl font-extrabold tracking-tighter;
+	@apply text-3xl font-extrabold tracking-tighter;
 }
 
 .h3 {
-    @apply text-3xl font-extrabold;
+	@apply text-3xl font-extrabold;
 }
 
 .h4 {
-    @apply text-2xl font-extrabold tracking-tight;
+	@apply text-2xl font-extrabold tracking-tight;
 }
 
 @screen md {
-    .h1 {
-        @apply text-5xl;
-    }
-
-    .h2 {
-        @apply text-4xl;
-    }
+	.h1 {
+		@apply text-5xl;
+	}
+	
+	.h2 {
+		@apply text-4xl;
+	}
 }
 
 /* Buttons */
@@ -34,23 +34,23 @@ body {
 .btn-lg,
 .btn-sm,
 .btn-xs {
-    @apply font-medium text-sm inline-flex items-center justify-center border border-transparent rounded-lg leading-5 shadow-sm transition;
+	@apply font-medium text-sm inline-flex items-center justify-center border border-transparent rounded-lg leading-5 shadow-sm transition;
 }
 
 .btn {
-    @apply px-3 py-2;
+	@apply px-3 py-2;
 }
 
 .btn-lg {
-    @apply px-4 py-3;
+	@apply px-4 py-3;
 }
 
 .btn-sm {
-    @apply px-2 py-1;
+	@apply px-2 py-1;
 }
 
 .btn-xs {
-    @apply px-2 py-0.5;
+	@apply px-2 py-0.5;
 }
 
 /* Forms */
@@ -58,15 +58,15 @@ input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration {
-    -webkit-appearance: none;
+	-webkit-appearance: none;
 }
 
 input:focus {
-    box-shadow: none !important;
+	box-shadow: none !important;
 }
 
 input {
-    background: none !important;
+	background: none !important;
 }
 
 .form-input,
@@ -75,107 +75,130 @@ input {
 .form-select,
 .form-checkbox,
 .form-radio {
-    @apply bg-white dark:bg-gray-900/30 border focus:ring-0 focus:ring-offset-0 dark:disabled:bg-gray-700/30 dark:disabled:border-gray-700 dark:disabled:hover:border-gray-700;
+	@apply bg-white dark:bg-gray-900/30 border focus:ring-0 focus:ring-offset-0 dark:disabled:bg-gray-700/30 dark:disabled:border-gray-700 dark:disabled:hover:border-gray-700;
 }
 
 .form-checkbox {
-    @apply rounded;
+	@apply rounded;
 }
 
 .form-input,
 .form-textarea,
 .form-multiselect,
 .form-select {
-    @apply text-sm text-gray-800 dark:text-gray-100 leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-gray-300 dark:border-gray-700/60 dark:hover:border-gray-600 dark:focus:border-gray-600 shadow-sm rounded-lg;
+	@apply text-sm text-gray-800 dark:text-gray-100 leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-gray-300 dark:border-gray-700/60 dark:hover:border-gray-600 dark:focus:border-gray-600 shadow-sm rounded-lg;
 }
 
 .form-input,
 .form-textarea {
-    @apply placeholder-gray-400 dark:placeholder-gray-500;
+	@apply placeholder-gray-400 dark:placeholder-gray-500;
 }
 
 .form-select {
-    @apply pr-10;
+	@apply pr-10;
 }
 
 .form-checkbox,
 .form-radio {
-    @apply text-violet-500 checked:bg-violet-500 dark:checked:border-transparent border border-gray-300 focus:border-violet-300 dark:border-gray-700/60 dark:focus:border-violet-500/50;
+	@apply text-violet-500 checked:bg-violet-500 dark:checked:border-transparent border border-gray-300 focus:border-violet-300 dark:border-gray-700/60 dark:focus:border-violet-500/50;
 }
 
 /* Switch element */
 .form-switch {
-    @apply relative select-none;
-    width: 44px;
+	@apply relative select-none;
+	width: 44px;
 }
 
 .form-switch label {
-    @apply block overflow-hidden cursor-pointer h-6 rounded-full;
+	@apply block overflow-hidden cursor-pointer h-6 rounded-full;
 }
 
 .form-switch label > span:first-child {
-    @apply absolute block rounded-full;
-    width: 20px;
-    height: 20px;
-    top: 2px;
-    left: 2px;
-    right: 50%;
-    transition: all .15s ease-out;
+	@apply absolute block rounded-full;
+	width: 20px;
+	height: 20px;
+	top: 2px;
+	left: 2px;
+	right: 50%;
+	transition: all .15s ease-out;
 }
 
 .form-switch input[type="checkbox"]:checked + label {
-    @apply bg-violet-500;
+	@apply bg-violet-500;
 }
 
 .form-switch input[type="checkbox"]:checked + label > span:first-child {
-    left: 22px;
+	left: 22px;
 }
 
 .form-switch input[type="checkbox"]:disabled + label {
-    @apply cursor-not-allowed bg-gray-100 dark:bg-gray-700/20 border border-gray-200 dark:border-gray-700/60;
+	@apply cursor-not-allowed bg-gray-100 dark:bg-gray-700/20 border border-gray-200 dark:border-gray-700/60;
 }
 
 .form-switch input[type="checkbox"]:disabled + label > span:first-child {
-    @apply bg-gray-400 dark:bg-gray-600;
+	@apply bg-gray-400 dark:bg-gray-600;
 }
 
 /* Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
-    display: none;
+	display: none;
 }
 
 .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
 }
 
+// pagination
+.item-pagination {
+	--item-pagination-bg-color: none !important;
+	--item-pagination-button-disabled-bg-color: none !important;
+}
+.item-pager{
+	.number{
+		@apply rounded-md dark:bg-black-300 mx-0.5;
+	}
+}
+.item-pagination button:disabled{
+}
+
+//
+.item-select__popper.item-popper{
+	@apply dark:border-black-100 !important;
+}
+.item-popper__arrow,.item-popper__arrow:before,.item-popper__arrow:after{
+	@apply dark:border-black-100 !important;
+}
+
+// remove global table style
 .item-custom-table.item-table.item-table--border {
-    border: 1px solid;
-    @apply border-gray-500 dark:border-black-100 rounded-lg;
-    
-    td {
-        @apply dark:bg-black-400 border-b border-solid border-gray-500 dark:border-black-100;
-    }
-    
-    &:after,
-    .item-table__inner-wrapper::before {
-        @apply bg-gray-100 dark:bg-black-100;
-    }
-    
-    & th.item-table__cell.is-leaf {
-        height: 52px;
-        border-bottom: 1px solid;
-        @apply dark:bg-black-200 border-gray-500 dark:border-black-400;
-        
-        .cell {
-            @apply text-gray-400;
-        }
-    }
-    
-    .item-table__cell {
-        border-right: none;
-        .cell {
-            @apply dark:text-white text-gray-500;
-        }
-    }
+	border: 1px solid;
+	@apply border-gray-500 dark:border-black-100 rounded-lg;
+	
+	td {
+		@apply dark:bg-black-400 border-b border-solid border-gray-500 dark:border-black-100;
+	}
+	
+	&:after,
+	.item-table__inner-wrapper::before {
+		@apply bg-gray-100 dark:bg-black-100;
+	}
+	
+	& th.item-table__cell.is-leaf {
+		height: 52px;
+		border-bottom: 1px solid;
+		@apply dark:bg-black-200 border-gray-500 dark:border-black-400;
+		
+		.cell {
+			@apply text-gray-400;
+		}
+	}
+	
+	.item-table__cell {
+		border-right: none;
+		
+		.cell {
+			@apply dark:text-white text-gray-500;
+		}
+	}
 }

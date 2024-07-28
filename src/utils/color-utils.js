@@ -28,3 +28,8 @@ export const lighten = (color, level) => {
         rgbc[i] = Math.floor((255 - rgbc[i]) * level + rgbc[i])
     return rgbToHex(rgbc[0], rgbc[1], rgbc[2])
 }
+
+export const hexToRgba = (hex, opacity) => {
+    let rgb = hexToRgb(hex)
+    return `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${opacity})`
+}
