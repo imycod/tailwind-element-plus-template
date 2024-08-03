@@ -1,0 +1,21 @@
+@import "tailwind.css";
+
+@import "input";
+@import "select";
+@import "menu";
+@import "button";
+@import "popper";
+
+body {
+    @apply relative text-base font-normal text-black dark:text-white;
+}
+
+/* Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}

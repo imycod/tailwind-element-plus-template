@@ -1,0 +1,20 @@
+.dark {
+  .item-select__popper.item-popper {
+    border: none ;
+
+    .item-popper__arrow::before {
+      border: none;
+    }
+  }
+
+  //.item-popper {
+  //  &.is-light {
+  //    @apply bg-black-400;
+  //    border-color: #1B1C23;
+  //
+  //    .el-popper__arrow::before {
+  //      @apply bg-black-400;
+  //    }
+  //  }
+  //}
+}

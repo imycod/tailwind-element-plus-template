@@ -1,0 +1,8 @@
+.dark{
+  .search-icon:not(.item-button--primary){
+    --item-button-hover-bg-color: var(--item-border-color) !important;
+    --item-button-hover-border-color:  var(--item-border-color) !important;
+    --item-button-active-border-color:  var(--item-border-color) !important;
+    --item-button-hover-text-color:  none !important;
+  }
+}
