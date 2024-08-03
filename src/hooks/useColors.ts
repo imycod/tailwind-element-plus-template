@@ -2,7 +2,7 @@ import {setProperty} from "@/utils/browser.ts";
 import {darken, lighten} from "@/utils/color-utils";
 
 export default function useColors() {
-    const colors = ['#9333ea','#409EFF']
+    const colors = ['#9B51F5','#409EFF']  
 
     function setColors(val:string) {
         setProperty('--item-color-primary',val)

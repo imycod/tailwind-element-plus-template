@@ -25,7 +25,7 @@ export const createVitePlugins = (viteEnv: ViteEnv): (PluginOption | PluginOptio
             dirs: ["src/utils/*", "src/apis/*",'src/hooks/*'],
             // https://juejin.cn/post/7189134329912492069
             include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/, /\.md$/],
-            dts: "../types/auto-imports.d.ts",
+            dts: "./types/auto-imports.d.ts",
             resolvers: [
                 ElementPlusResolver({
                     importStyle: VITE_NODE_ENV === 'development' ? "sass" : "sass",  // 这段话消息提示等

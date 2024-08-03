@@ -22,7 +22,7 @@ export default defineConfig(({mode}) => {
         // 服务端渲染
         server: {
             // 端口号
-            port: '9000',
+            port: '9002',
             host: "127.0.0.1",
             proxy: {
                 '/api': {

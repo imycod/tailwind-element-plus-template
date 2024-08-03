@@ -11,20 +11,20 @@ export function createAuthGuard(router, logger) {
             next()
             return
         }
-        // const userStore = useUserStoreHook()
-        // const tokens = getToken()
-        // if (!tokens?.oAuthToken) {
-        //     redirectTo('/login')
-        //     return
-        // }
-        // const token = getSessionItem(tokenKey)
-        // if (!token){
-        //     await userStore.authorize(tokens)
-        // }
-        // // must be oAuthToken but pass it all system here support 请求携带端token
-        // if (!userStore.userInfo) {
-        //     userStore.getUserInfo().then(next).catch(()=>redirectTo('/error/500'))
-        // }
+        const userStore = useUserStoreHook()
+        const tokens = getToken()
+        if (!tokens?.oAuthToken) {
+            redirectTo('/login')
+            return
+        }
+        const token = getSessionItem(tokenKey)
+        if (!token){
+            await userStore.authorize(tokens)
+        }
+        // must be oAuthToken but pass it all system here support 请求携带端token
+        if (!userStore.userInfo) {
+            userStore.getUserInfo().then(next).catch(()=>redirectTo('/error/500'))
+        }
         next()
     });
 }
