@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 const colors = require('tailwindcss/colors');
-const tailwind_classes = require('./src/styles/design-system/tailwind-base.json');
+const tailwind_classes = require('./src/assets/styles/tailwind-base.json');
 
 export default {
 	content: [
