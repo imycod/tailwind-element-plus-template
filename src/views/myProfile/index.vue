@@ -28,6 +28,8 @@
         :value="item.value"
       />
     </el-select>
+
+    <el-input v-model="input"></el-input>
   </div>
 </template>
 
@@ -114,7 +116,7 @@ onMounted(async ()=>{
     }
   }
   .item-my-profile-card {
-    @apply bg-secondary h-20 rounded-lg mt-5;
+    @apply  bg-red-500 dark:bg-black-300  h-20 rounded-lg mt-5;
   }
 }
 </style>

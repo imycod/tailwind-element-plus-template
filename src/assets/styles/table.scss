@@ -1,0 +1,56 @@
+.dark {
+  .item-table {
+    //--item-table-tr-bg-color: var(--gray-900) !important; // --item-bg-color global 覆盖了
+    border: 1px solid var(--gray-900);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .item-table.item-table--border {
+    @apply border-solid border-gray-800;
+
+    td {
+      @apply bg-black-400 border-b border-solid border-gray-800;
+    }
+
+    &:after,
+    .item-table__inner-wrapper::before {
+      @apply bg-black-100;
+    }
+
+    .item-table-column--selection {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    th.item-table__cell.is-leaf {
+      height: 52px;
+    }
+
+    //th.item-table__cell.is-leaf {
+    //  height: 52px;
+    //  border-bottom: 1px solid;
+    //  @apply bg-black-200 border-black-400;
+    //  .cell {
+    //    @apply text-gray-300;
+    //    .el-checkbox {
+    //      .el-checkbox__input {
+    //        &.is-indeterminate {
+    //          .el-checkbox__inner {
+    //            @apply bg-purple-500;
+    //          }
+    //        }
+    //      }
+    //    }
+    //  }
+    //}
+    .item-table__cell {
+      border-right: none;
+      // 单元格
+      .cell {
+        @apply text-white-100;
+      }
+    }
+  }
+}

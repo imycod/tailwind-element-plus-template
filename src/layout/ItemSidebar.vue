@@ -137,7 +137,7 @@ onMounted(() => {
   border-right: none;
   height: 100%;
   padding: 10px 10px;
-  @apply bg-secondary;
+  @apply bg-white dark:bg-black-300;
 
   .logo-wrapper.is-active{
     //@apply bg-transparent;
