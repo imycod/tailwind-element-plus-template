@@ -34,6 +34,7 @@ export default {
 					"background-color": "var(--el-button-bg-color,var(--el-color-white))"
 				}
 			});
+			// 把tailwindcss 的colors注入到css变量中
 			addBase({
 				':root': {
 					"--black-5": tailwind_classes["black"]["5"],
