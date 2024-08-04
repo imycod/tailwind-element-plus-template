@@ -28,3 +28,34 @@
 5. App.vue -> style
 6. layout/index.vue -> div.dark:bg-black-400
 7. tailwind.config.js
+
+### 组件库与自定义封装组件样式说明：
+自己业务系统样式
+```css
+:root {
+--el-menu-text-color: var(--white);
+--el-menu-hover-bg-color: rgba(22, 120, 255, 0.2);
+--el-menu-bg-color: var(--black-300); // 覆盖菜单背景颜色，原因是组件里里面只重置了dark模式下的菜单背景为透明色，但是亮色模式下没有重置，light mode是白色的
+--item-menu-bg-color: var(--black-300); // 背景颜色
+}
+
+:root.dark {
+ --item-menu-bg-color: var(--black-300); 
+}
+```
+```vue
+<template>
+ <div class="item-layout-menu">
+  <i-sidebar router :collapse="isCollapse" :class="[!isCollapse && 'w-[320px]']"
+             :data="routesMenu"></i-sidebar>
+ </div>
+</template>
+
+<style lang="scss" scoped>
+ .item-layout-menu { // 举个例子而已
+  background-color: var(--item-menu-bg-color); // 这里是用我们root.dark自己定义的变量，能覆盖是因为组件里面的dark模式背景是透明的。但其实light mode是白色的，所以这里可以覆盖，因此你可以在root覆盖
+ }
+</style>
+```
+如果组件库的组件样式写的很完备的情况下，比如dark和light都重置了就没有此问题，问题是如果设置了namespace当组件库没有设置情况，默认用的是el，这里拿element-plus举例。
+此时自己封装的组件内部class name是-el-，当重置比如只考虑了dark模式，那么到业务系统切换成light模式时可能样式就会多少有些问题，此时要在root重置el样式即可
