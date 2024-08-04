@@ -48,6 +48,7 @@ export function convertColorsToCSSVariables(colors, prefix = '') {
     if (typeof value === 'object') {
       Object.assign(result, convertColorsToCSSVariables(value, newKey));
     } else {
+      const newKey = key === 'DEFAULT' ? `${prefix}` : `${prefix}-${key}`;
       result[newKey] = value;
     }
   }
