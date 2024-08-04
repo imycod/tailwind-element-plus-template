@@ -74,6 +74,14 @@
     ]
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\31700\Desktop\item-local\item-pass-web\src\assets\styles" />
+      <recent name="C:\Users\31700\Desktop\item-local\item-pass-web\src\views" />
+      <recent name="C:\Users\31700\Desktop\item-local\item-pass-web\src\components\item-table" />
+      <recent name="C:\Users\31700\Desktop\item-local\item-pass-web\src\hooks" />
+    </key>
+  </component>
   <component name="RunManager" selected="npm.dev">
     <configuration name="build:stage:saas" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
@@ -152,6 +160,12 @@
       <workItem from="1722763650415" duration="28000" />
       <workItem from="1722763867265" duration="64000" />
       <workItem from="1722764464475" duration="443000" />
+      <workItem from="1722787637899" duration="196000" />
+      <workItem from="1722787912113" duration="185000" />
+      <workItem from="1722788374710" duration="24000" />
+      <workItem from="1722788511553" duration="110000" />
+      <workItem from="1722788720681" duration="61000" />
+      <workItem from="1722788896859" duration="50000" />
     </task>
     <task id="LOCAL-00001" summary="feat: 移除质量中的环境变量">
       <option name="closed" value="true" />

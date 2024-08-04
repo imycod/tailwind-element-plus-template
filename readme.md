@@ -59,3 +59,32 @@
 ```
 如果组件库的组件样式写的很完备的情况下，比如dark和light都重置了就没有此问题，问题是如果设置了namespace当组件库没有设置情况，默认用的是el，这里拿element-plus举例。
 此时自己封装的组件内部class name是-el-，当重置比如只考虑了dark模式，那么到业务系统切换成light模式时可能样式就会多少有些问题，此时要在root重置el样式即可
+
+### fakerjs
+--> upgrade node to 18+
+responseHeaders: new Headers({ ...globalResponseHeaders, ...responseHeaders }), ReferenceError: Headers is not defined
+node 16.20.2
+vite 5.0.6
+npm 8.19.4
+vite-plugin-fake-server 2.1.1
+
+but i use this code with chatgpt js 
+```js
+// Ensure Headers is available 
+const Headers = globalThis.Headers || (() => { 
+  // A simple polyfill for Headers if not available 
+   class SimpleHeaders {
+     constructor(headers) {
+       this.headers = {}; 
+       for (const key in headers) { 
+         if (headers.hasOwnProperty(key)) {
+           this.headers[key.toLowerCase()] = headers[key];
+         } } } append(name, value) { 
+       this.headers[name.toLowerCase()] = value;
+     } get(name) { return this.headers[name.toLowerCase()] || null;
+     } has(name) { return this.headers.hasOwnProperty(name.toLowerCase()); 
+     } keys() { return Object.keys(this.headers); } } return SimpleHeaders; 
+})();  
+// solved my problem.I don't know if other questions will be introduced. If anyone encounters them, they can refer to them.
+
+```
