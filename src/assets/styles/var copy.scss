@@ -1,0 +1,47 @@
+@forward 'element-plus/theme-chalk/src/mixins/config.scss' with (
+  $namespace: 'item'
+);
+
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  $colors: (
+     'primary': (
+       'base': #9B51F5,
+     ),
+  ),
+  $menu:(
+    'item-height': 40px,
+  ),
+);
+
+:root {
+  /* --item-fill-color-blank: #4838FC; (注释掉的部分在这里是空的) */
+  --el-menu-text-color: var(--white);
+  --el-menu-hover-bg-color: rgba(22, 120, 255, 0.2);
+  --el-menu-bg-color: var(--black-300); // 覆盖菜单背景颜色，原因是组件里里面只重置了dark模式下的菜单背景为透明色，但是亮色模式下没有重置，light mode是白色的
+  --item-menu-bg-color: var(--black-300); // 背景颜色
+  --item-fill-color-light: var(--gray-100);
+  --item-table-border-color: '';
+  --item-border-color-lighter: '';
+  --item-table-tr-bg-color: var(--white);
+  --item-popper-border-color: var(--white);
+}
+
+:root.dark {
+  --item-popper-border-color: var(--black-100);
+  --item-bg-color-overlay: var(--black-400);
+  --item-bg-color: var(--black-400); /* overlay */
+  --item-text-color-regular: var(--white); /* dialog > text */
+  --item-menu-bg-color: var(--black-300);
+  --item-border-color: var(--black-50);
+  --item-text-color-primary: var(--white);
+  --item-menu-active-color: var(--white);
+  --item-menu-hover-text-color: var(--white);
+  --item-menu-hover-bg-color: rgba(255, 255, 255, 0.1);
+  --item-input-text-color: var(--white);
+  --item-fill-color-blank: var(--black-50);
+  --item-fill-color-light: var(--black-300);
+  --item-table-border-color: var(--black-50);
+  --item-border-color-lighter: var(--black-50);
+  --item-mask-color: var(--black-500);
+  /* --item-input-bg-color: ''; */
+}
