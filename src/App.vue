@@ -26,7 +26,9 @@ useEventListener('click',(event)=>{
 })
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="scss">
+#app{
+  background-color: var(--item-bg-color-page);
+}
 </style>
 

@@ -17,7 +17,8 @@ onMounted(()=>{
 </script>
 
 <template>
-  <div class="flex w-full h-screen overflow-hidden dark:bg-black-400">
+<!--  // dark:bg-black-400 -->
+  <div class="flex w-full h-screen overflow-hidden">
     <!-- Sidebar -->
     <Sidebar :sidebarOpen="sidebarOpen" @close-sidebar="sidebarOpen = false" />
 

@@ -152,8 +152,10 @@
   --elevation-4: 0px 2px 3px 0px rgba(0, 0, 0, 0.30), 0px 6px 10px 4px rgba(0, 0, 0, 0.15);
   --elevation-5: 0px 4px 4px 0px rgba(0, 0, 0, 0.30), 0px 8px 12px 6px rgba(0, 0, 0, 0.15);
 
-  --item-popper-border-color: var(--black-60);
   --item-bg-color-overlay: var(--black-300);
+  --item-bg-color: var(--black-300);
+  --item-bg-color-page: var(--black-400);
+  --item-popper-border-color: var(--black-60);
   --item-text-color-regular: var(--white); // dialog > text
   --item-menu-bg-color: var(--black-300);
   //--item-color-300: var(--black-300);
@@ -167,7 +169,6 @@
   --item-fill-color-light: var(--white-10);
   --item-border-color-lighter: none;
   //--item-table-border-color: var(--white);
-  --item-bg-color: var(--black-300); // overlay
   //--item-mask-color: var(--black-50), // https://gist.github.com/danmatthews/f6ea70c3a1ef6348b38a5bd79ac1f6dd
   // "--item-input-bg-color":'',
 }
