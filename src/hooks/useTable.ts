@@ -2,7 +2,8 @@ import {CellStyle, ElMessage} from 'element-plus';
 import {toUnderline, downBlobFile as downBlobFileUtil} from "@/utils/utils.ts";
 import {h, onMounted, onUnmounted, ref, render} from "vue";
 import TableComponent from "@/components/item-table/index.vue";
-
+import {clone,isEmpty} from "radash"
+import { isUndefined } from 'element-plus/es/utils/types.mjs';
 /**
  * 表格组件基础配置属性
  */
@@ -75,6 +76,7 @@ export function useTable(options?: BasicTableProps) {
 		descs: any[];
 		dataListLoading: boolean;
 		dataList: any[];
+		columns?: any[];
 		isPage: boolean
 	} = {
 		// 列表数据是否正在加载中，默认为false
@@ -87,6 +89,7 @@ export function useTable(options?: BasicTableProps) {
 		queryForm: {},
 		// 表格展示的数据数组，默认为空数组
 		dataList: [],
+		columns:[],
 		// 分页组件属性配置，如当前页码、每页展示数据条数等，默认值为 {current:1, size:10,total:0,pageSizes:[1, 10, 20, 50, 100, 200],layout:'total, sizes, prev, pager, next, jumper'}
 		pagination: {
 			current: 1,
@@ -310,8 +313,69 @@ export function useTable(options?: BasicTableProps) {
 		});
 	}
 
+	type ColumnSchemaType = {
+        exclude?: string[],
+		columnKeys?: string[],
+    }
+
+    function getSchema(options: ColumnSchemaType) {
+		if (isUndefined(options)) {
+			throw new Error('options is undefined')
+		}
+		const initalColumnObj = {
+			prop: '',
+			key: '',
+			title: '',
+			index: 0,
+			label: '',
+			width: '100%',
+		}
+		
+        const columns = computed(() => {
+			if (options.columnKeys) {
+				return options.columnKeys.map((key,index) => {
+					let obj = { ...initalColumnObj  }
+					obj.prop = key
+					obj.key = key
+					obj.title = key.toUpperCase()
+					obj.index = index
+					obj.label = key
+					return obj
+				})
+			}
+            const row = clone(state.dataList[0]) ?? {}
+            if (isEmpty(row) && !state.dataList.length) {
+                return state.columns
+            }
+			if(options.exclude){
+				Object.keys(row).forEach(key => {
+					if (options.exclude.includes(key)) {
+						delete row[key]
+					}
+				})
+			}
+            const columns = Object.keys(row).map((key, index) => {
+				let obj = { ...initalColumnObj  }
+				obj.prop = key
+				obj.key = key
+				obj.title = key.toUpperCase()
+				obj.index = index
+				obj.label = key
+                return obj
+            })
+            if (!state.columns.length){
+                state.columns = columns
+                return columns
+            }else{
+                return state.columns
+            }
+        })
+        return columns
+    }
+
 	return {
 		tableStyle,
+		getSchema,
 		getDataList,
 		sizeChangeHandle,
 		currentChangeHandle,
