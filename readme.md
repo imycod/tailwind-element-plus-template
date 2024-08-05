@@ -88,3 +88,70 @@ const Headers = globalThis.Headers || (() => {
 // solved my problem.I don't know if other questions will be introduced. If anyone encounters them, they can refer to them.
 
 ```
+### useTable & getSchema
+
+```ts
+/**
+  getSchema({
+    exclude:['id'],  若服务端state.dataList有数据情况下，且key是column key一一对应，此时可以用这个属性排除掉不显示,
+    columnKeys:['name','age']  若服务端的key和column key不对应，可以用这个属性      
+  })
+ * @param options
+ */
+
+function getSchema(options: ColumnSchemaType) {
+		if (isEmpty(options)) {
+			throw new Error('options is undefined')
+		}
+		const columns = computed(() => {
+			// 一开始若指定了state.columns直接用指定的
+			if (state.columns && state.columns.length) {
+				return state.columns
+			}
+			// 若没指定则找找传过来的
+			if (options.columnKeys) {
+				return options.columnKeys.map((key, index) => {
+					return {
+						prop: key,
+						key: key,
+						title: key.toUpperCase(),
+						index: index,
+						label: key,
+						width: '100%',
+					}
+				})
+			}
+			// 剩下用服务端自动生成
+			let row = {}
+			// 这是一个边界判断，必须要先fetch到list
+			if (state.dataList) {
+				row = clone(state.dataList[0])
+			}
+			// 若服务端list没有值 也没有指定时先返回空，兴许接口还在请求，等第二次进来就有值了
+            if (isEmpty(row)) {
+             return []
+            }
+			Object.keys(row).forEach(key => {
+				if (options.exclude.includes(key)) {
+					delete row[key]
+				}
+			})
+			const columns = Object.keys(row).map((key, index) => {
+				return {
+					prop: key,
+					key: key,
+					title: key.toUpperCase(),
+					index: index,
+					label: key,
+					width: '100%',
+				}
+			})
+			if (columns && !state.columns.length) {
+				state.columns = columns
+				return columns
+			}
+			return state.columns
+		})
+		return columns
+	}
+```

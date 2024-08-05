@@ -2,8 +2,9 @@ import {CellStyle, ElMessage} from 'element-plus';
 import {toUnderline, downBlobFile as downBlobFileUtil} from "@/utils/utils.ts";
 import {h, onMounted, onUnmounted, ref, render} from "vue";
 import TableComponent from "@/components/item-table/index.vue";
-import {clone,isEmpty} from "radash"
-import { isUndefined } from 'element-plus/es/utils/types.mjs';
+import {clone, isEmpty} from "radash"
+import {isUndefined} from 'element-plus/es/utils/types.mjs';
+
 /**
  * 表格组件基础配置属性
  */
@@ -16,6 +17,7 @@ export interface BasicTableProps {
 	queryForm?: any;
 	// 数据列表数组
 	dataList?: any[];
+	columns?: any[];
 	// 分页属性对象
 	pagination?: Pagination;
 	// 数据列表，loading状态标志，默认为false
@@ -89,7 +91,7 @@ export function useTable(options?: BasicTableProps) {
 		queryForm: {},
 		// 表格展示的数据数组，默认为空数组
 		dataList: [],
-		columns:[],
+		columns: [],
 		// 分页组件属性配置，如当前页码、每页展示数据条数等，默认值为 {current:1, size:10,total:0,pageSizes:[1, 10, 20, 50, 100, 200],layout:'total, sizes, prev, pager, next, jumper'}
 		pagination: {
 			current: 1,
@@ -284,7 +286,7 @@ export function useTable(options?: BasicTableProps) {
 				column,
 				currentPage: currentPage.value,
 				// https://play.vuejs.org/
-				"onUpdate:currentPage": (val) => 	currentPage.value = val,
+				"onUpdate:currentPage": (val) => currentPage.value = val,
 				pageSize: pageSize.value,
 				"onUpdate:pageSize": (val) => pageSize.value = val,
 			});
@@ -301,7 +303,7 @@ export function useTable(options?: BasicTableProps) {
 			container.value = document.createElement('div');
 			document.body.appendChild(container.value);
 
-			watch([currentPage, pageSize], renderTable, { immediate: true });
+			watch([currentPage, pageSize], renderTable, {immediate: true});
 
 			targetEl.appendChild(container.value);
 		});
@@ -314,64 +316,60 @@ export function useTable(options?: BasicTableProps) {
 	}
 
 	type ColumnSchemaType = {
-        exclude?: string[],
+		exclude?: string[],
 		columnKeys?: string[],
-    }
+	}
 
-    function getSchema(options: ColumnSchemaType) {
-		if (isUndefined(options)) {
+	function getSchema(options: ColumnSchemaType) {
+		if (isEmpty(options)) {
 			throw new Error('options is undefined')
 		}
-		const initalColumnObj = {
-			prop: '',
-			key: '',
-			title: '',
-			index: 0,
-			label: '',
-			width: '100%',
-		}
-		
-        const columns = computed(() => {
-			if (options.columnKeys) {
-				return options.columnKeys.map((key,index) => {
-					let obj = { ...initalColumnObj  }
-					obj.prop = key
-					obj.key = key
-					obj.title = key.toUpperCase()
-					obj.index = index
-					obj.label = key
-					return obj
-				})
+		const columns = computed(() => {
+			if (state.columns && state.columns.length) {
+				return state.columns
 			}
-            const row = clone(state.dataList[0]) ?? {}
-            if (isEmpty(row) && !state.dataList.length) {
-                return state.columns
-            }
-			if(options.exclude){
-				Object.keys(row).forEach(key => {
-					if (options.exclude.includes(key)) {
-						delete row[key]
+			if (options.columnKeys) {
+				return options.columnKeys.map((key, index) => {
+					return {
+						prop: key,
+						key: key,
+						title: key.toUpperCase(),
+						index: index,
+						label: key,
+						width: '100%',
 					}
 				})
 			}
-            const columns = Object.keys(row).map((key, index) => {
-				let obj = { ...initalColumnObj  }
-				obj.prop = key
-				obj.key = key
-				obj.title = key.toUpperCase()
-				obj.index = index
-				obj.label = key
-                return obj
-            })
-            if (!state.columns.length){
-                state.columns = columns
-                return columns
-            }else{
-                return state.columns
-            }
-        })
-        return columns
-    }
+			let row = {}
+			if (state.dataList) {
+				row = clone(state.dataList[0])
+			}
+			if (isEmpty(row)) {
+				return []
+			}
+			Object.keys(row).forEach(key => {
+				if (options.exclude.includes(key)) {
+					delete row[key]
+				}
+			})
+			const columns = Object.keys(row).map((key, index) => {
+				return {
+					prop: key,
+					key: key,
+					title: key.toUpperCase(),
+					index: index,
+					label: key,
+					width: '100%',
+				}
+			})
+			if (columns && !state.columns.length) {
+				state.columns = columns
+				return columns
+			}
+			return state.columns
+		})
+		return columns
+	}
 
 	return {
 		tableStyle,
