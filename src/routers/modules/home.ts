@@ -38,6 +38,14 @@ export default {
       },
     },
     {
+      path: "/template1",
+      name: "Template",
+      component: () => import("@/views/template/index1.vue"),
+      meta: {
+        icon: "ListBullet",
+      },
+    },
+    {
       path: "/activity",
       name: "Activities",
       component: () => import("@/views/activies/index.vue"),

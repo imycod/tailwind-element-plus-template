@@ -38,6 +38,7 @@
     "qs": "^6.12.3",
     "radash": "^12.1.0",
     "responsive-storage": "^2.2.0",
+    "sortablejs": "^1.15.2",
     "vue": "^3.4.34",
     "vue-demi": "^0.14.8",
     "vue-flatpickr-component": "^11.0.3",
@@ -48,6 +49,7 @@
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
     "@vitejs/plugin-vue": "^5.0.5",
+    "@vitejs/plugin-vue-jsx": "^4.0.0",
     "@vue/compiler-sfc": "^3.2.20",
     "autoprefixer": "^10.4.16",
     "cross-env": "^7.0.3",

@@ -1,6 +1,6 @@
 @import "tailwind.css";
-@import 'fonts';
-@import 'color';
+@import "fonts";
+@import "color";
 // @import "typography";
 
 @import "dark-var";
@@ -11,17 +11,26 @@
 @import "button";
 @import "popper";
 @import "table";
+@import "pagination";
+@import "form";
 
 body {
-    @apply relative text-base font-normal text-black dark:text-white;
+  @apply relative text-base font-normal text-black dark:text-white;
 }
 
 /* Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.wrapper-border-table {
+  @apply dark:border rounded-md dark:border-gray-700;
+}
+.flow-shadow {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }

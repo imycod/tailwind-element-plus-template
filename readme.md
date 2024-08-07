@@ -166,3 +166,12 @@ function getSchema(options: ColumnSchemaType) {
 		return columns
 	}
 ```
+
+### super table
+
+```vue
+<template #propertyName="{row, $index}">
+      <a class="text-purple-400 underline cursor-pointer"> {{row['propertyName']}}</a>
+  <!--        <el-input v-if="$index === 0" v-model="row['propertyName']"></el-input>-->
+</template>
+```

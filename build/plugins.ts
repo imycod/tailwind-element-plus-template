@@ -6,6 +6,8 @@ import ElementPlus from "unplugin-element-plus/vite";
 import {ElementPlusResolver} from "unplugin-vue-components/resolvers";
 import compressPlugin from "vite-plugin-compression";
 import { vitePluginFakeServer } from "vite-plugin-fake-server";
+import vueJsx from "@vitejs/plugin-vue-jsx";
+
 /**
  * 创建 vite 插件
  * @param viteEnv
@@ -15,6 +17,7 @@ export const createVitePlugins = (viteEnv: ViteEnv): (PluginOption | PluginOptio
     
     return [
         vue(),
+        vueJsx(),
         compressPlugin({
             threshold: 3072, //3KB 仅压缩文件大小大于此阈值的文件
             deleteOriginFile: true, // 是否删除原始文件
