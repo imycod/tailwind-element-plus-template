@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { render } from 'vue';
+
 defineOptions({
   name: 'ItemTable'
 })
@@ -46,7 +48,7 @@ const props = defineProps({
     default: () => {
     }
   },
-  currentPage:{
+  currentPage: {
     type: Number,
     default: 1
   },
@@ -55,11 +57,11 @@ const props = defineProps({
     default: 10
   }
 })
-const currentPage = defineModel('currentPage',{
-    type: Number,
-    default: 1
+const currentPage = defineModel('currentPage', {
+  type: Number,
+  default: 1
 })
-const pageSize = defineModel('pageSize',{
+const pageSize = defineModel('pageSize', {
   type: Number,
   default: 10
 })
@@ -67,28 +69,26 @@ const pageSize = defineModel('pageSize',{
 // const emit = defineEmits(['update:currentPage','update:pageSize'])
 // const currentPage = useVModel(props,'currentPage',emit)
 // const pageSize = useVModel(props,'pageSize',emit)
+
+const SlotComponent = {
+  functional: true,
+  render(h, ctx) {
+    return ctx.props.slot(ctx.props.params)
+  }
+}
 </script>
 
 <template>
   <el-config-provider namespace="item">
     <div>
-      {{ currentPage }} / {{ pageSize }}
-      <el-table class="item-custom-table" border v-if="visible" :data="data">
+      <el-table class="item-custom-table" border :data="data">
         <el-table-column v-for="(item, index) in column" :type="item.type" :key="index" :prop="item.key"
-                         :label="item.title">
+          :label="item.title">
         </el-table-column>
       </el-table>
-      <el-pagination
-          v-model:current-page="currentPage"
-          v-model:page-size="pageSize"
-          :page-sizes="[100, 200, 300, 400]"
-          :disabled="disabled"
-          :background="background"
-          layout="sizes, prev, pager, next"
-          :total="400"
-          @size-change="sizeChange"
-          @current-change="currentChange"
-      />
+      <el-pagination v-model:current-page="currentPage" v-model:page-size="pageSize" :page-sizes="[100, 200, 300, 400]"
+        :disabled="disabled" :background="background" layout="sizes, prev, pager, next" :total="400"
+        @size-change="sizeChange" @current-change="currentChange" />
     </div>
   </el-config-provider>
 </template>

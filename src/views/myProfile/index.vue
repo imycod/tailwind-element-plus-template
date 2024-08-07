@@ -16,17 +16,11 @@
 
     <div id="table"></div>
 
-    <el-select
-      v-model="value"
-      placeholder="Select"
-      style="width: 240px"
-    >
-      <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value"
-      />
+    <item-table :data="data" :column="column"></item-table>
+
+
+    <el-select v-model="value" placeholder="Select" style="width: 240px">
+      <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
     </el-select>
 
     <el-input v-model="input"></el-input>
@@ -34,8 +28,8 @@
 </template>
 
 <script setup lang="ts">
-import {addDialog} from "@/components/item-dialog/index.ts";
-import {useTable} from "@/hooks/useTable.ts"
+import { addDialog } from "@/components/item-dialog/index.ts";
+import { useTable } from "@/hooks/useTable.ts"
 
 const value = ref('')
 const options = [
@@ -64,59 +58,64 @@ const options = [
 function open() {
   addDialog({
     title: 'xxx',
-    contentRenderer({options, index}) {
+    contentRenderer({ options, index }) {
       console.log(options)
     },
   })
 }
 
-const {addTable}= useTable({})
-addTable('#table',{
-  visible:true,
-  data:[{
-    id:1,
-    name:'张三',
-    age:18
-  },{
-    id:2,
-    name:'李四',
-    age:19
-  }],
-  column:[
-    {
-      title:'ID',
-      key:'id',
-    },
-    {
-      title:'姓名',
-      key:'name'
-    },
-    {
-      title:'年龄',
-      key:'age'
-    }
-  ]
+const { addTable } = useTable({})
+const data = [{
+  id: 1,
+  name: '张三',
+  age: 18
+}, {
+  id: 2,
+  name: '李四',
+  age: 19
+}]
+const column = [
+  {
+    title: 'ID',
+    key: 'id',
+  },
+  {
+    title: '姓名',
+    key: 'name'
+  },
+  {
+    title: '年龄',
+    key: 'age'
+  }
+]
+addTable('#table', {
+  visible: true,
+  data,
+  column,
 })
-onMounted(async ()=>{
- // const result = await retry({ times:10,delay:1000 },getTodos)
- //  const result = await getTodos()
+onMounted(async () => {
+  // const result = await retry({ times:10,delay:1000 },getTodos)
+  //  const result = await getTodos()
 })
 </script>
 
 <style lang="scss" scoped>
-.item-my-profile-layout{
-  .item-my-profile-title{
+.item-my-profile-layout {
+  .item-my-profile-title {
     @apply flex items-center;
-    h1{
+
+    h1 {
       @apply text-2xl font-bold;
     }
-    > span{
+
+    >span {
       margin-left: 10px;
       @apply text-blue-600;
     }
   }
+
   .item-my-profile-card {
-    @apply  bg-red-500 dark:bg-black-300  h-20 rounded-lg mt-5;
+    @apply bg-red-500 dark:bg-black-300 h-20 rounded-lg mt-5;
   }
 }
 </style>
