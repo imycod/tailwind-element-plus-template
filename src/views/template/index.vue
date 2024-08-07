@@ -76,11 +76,35 @@ onMounted(() => {
     ]
   }, 2100)
 })
+
+
+const state = reactive({
+  loading: false,
+  isPage: true,
+  pagination: {
+    current: 1,
+    total: 0,
+    size: 10
+  },
+  props: {
+    item: 'list',
+    totalCount: 'total'
+  },
+  dataList: [],
+  queryForm: {},
+  pageList: getUsers,// someapi
+  descs: ['create_time'],
+})
+const { getDataList, getSchema:getColumnSchema,currentChangeHandle, sizeChangeHandle, downBlobFile, tableStyle } = useTable(state)
+const columns = getColumnSchema({
+  // columnKeys:['name1','gender','name2','hobbie','date']
+})
 </script>
 
 <template>
   <div>
     <search :schema="schema" v-model="form" :callback="callback"></search>
+    <item-table max-height="59vh" :schema="columns" :data="state.dataList"></item-table>
   </div>
 </template>
 

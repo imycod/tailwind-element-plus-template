@@ -14,7 +14,7 @@ const props = defineProps({
     type: Array,
     default: () => []
   },
-  column: {
+  schema: {
     type: Array,
     default: () => []
   },
@@ -79,18 +79,13 @@ const SlotComponent = {
 </script>
 
 <template>
-  <el-config-provider namespace="item">
-    <div>
-      <el-table class="item-custom-table" border :data="data">
-        <el-table-column v-for="(item, index) in column" :type="item.type" :key="index" :prop="item.key"
-          :label="item.title">
-        </el-table-column>
-      </el-table>
-      <el-pagination v-model:current-page="currentPage" v-model:page-size="pageSize" :page-sizes="[100, 200, 300, 400]"
-        :disabled="disabled" :background="background" layout="sizes, prev, pager, next" :total="400"
-        @size-change="sizeChange" @current-change="currentChange" />
-    </div>
-  </el-config-provider>
+  <el-table class="item-custom-table" border v-bind="$attrs" :data="data">
+    <el-table-column v-for="(item, index) in schema" :key="index" :prop="item.key" :label="item.title">
+    </el-table-column>
+  </el-table>
+  <el-pagination v-model:current-page="currentPage" v-model:page-size="pageSize" :page-sizes="[100, 200, 300, 400]"
+    :disabled="disabled" :background="background" layout="sizes, prev, pager, next" :total="400" @size-change="sizeChange"
+    @current-change="currentChange" />
 </template>
 
 <style scoped lang="scss">
