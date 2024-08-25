@@ -1,0 +1,9 @@
+{
+  "redis": {
+    "host": "your-redis-host",
+    "port": 6379,
+    "password": "your-redis-password"
+  },
+  "jwtSecret": "your-jwt-secret",
+  "authServiceUrl": "https://your-auth-service.com/api"
+}

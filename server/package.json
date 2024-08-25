@@ -1,0 +1,29 @@
+{
+  "name": "api-gateway",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "npx nodemon server.js",
+    "start:authServer": "npx nodemon authServer.js",
+    "start:userServer": "npx nodemon userServer.js",
+    "stage": "cross-env CONFIG_PATH=./config/stage.json  node src/server.js",
+    "prod": "cross-env CONFIG_PATH=./config/prod.json  node src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.7.5",
+    "cross-env": "^7.0.3",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.4.0",
+    "express-session": "^1.18.0",
+    "http-proxy-middleware": "^3.0.0",
+    "ioredis": "^5.4.1",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "passport": "^0.7.0",
+    "passport-oauth2": "^1.8.0"
+  }
+}
