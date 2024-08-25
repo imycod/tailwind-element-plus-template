@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "npx nodemon server.js",
+    "start":"node start.js",
+    "start:server":"npx nodemon server.js",
     "start:authServer": "npx nodemon authServer.js",
     "start:userServer": "npx nodemon userServer.js",
-    "stage": "cross-env CONFIG_PATH=./config/stage.json  node src/server.js",
-    "prod": "cross-env CONFIG_PATH=./config/prod.json  node src/server.js"
+    "stage": "cross-env CONFIG_PATH=./config/stage.json  node server.js",
+    "prod": "cross-env CONFIG_PATH=./config/prod.json  node server.js"
   },
   "keywords": [],
   "author": "",
