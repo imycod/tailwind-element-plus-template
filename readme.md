@@ -70,6 +70,7 @@ vite-plugin-fake-server 2.1.1
 
 but i use this code with chatgpt js 
 ```js
+// https://github.com/condorheroblog/vite-plugin-fake-server/issues/31
 // Ensure Headers is available 
 const Headers = globalThis.Headers || (() => { 
   // A simple polyfill for Headers if not available 
@@ -88,6 +89,16 @@ const Headers = globalThis.Headers || (() => {
 // solved my problem.I don't know if other questions will be introduced. If anyone encounters them, they can refer to them.
 
 ```
+
+### Slots
+```ts
+setup(props, context){
+    console.log("父组件传入的插槽对象", context.slots)
+}
+import {useSlots} from "vue"
+const slots = useSlots()
+console.log("父组件传入的插槽对象", slots)
+
 ### useTable & getSchema
 
 ```ts

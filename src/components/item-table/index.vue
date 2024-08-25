@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { render } from 'vue';
+
 defineOptions({
   name: 'ItemTable'
 })
@@ -67,6 +69,13 @@ const pageSize = defineModel('pageSize', {
 // const emit = defineEmits(['update:currentPage','update:pageSize'])
 // const currentPage = useVModel(props,'currentPage',emit)
 // const pageSize = useVModel(props,'pageSize',emit)
+
+const SlotComponent = {
+  functional: true,
+  render(h, ctx) {
+    return ctx.props.slot(ctx.props.params)
+  }
+}
 </script>
 
 <template>
