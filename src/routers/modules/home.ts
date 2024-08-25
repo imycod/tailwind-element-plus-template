@@ -2,7 +2,7 @@
  * @Author: wuxs 317009160@qq.com
  * @Date: 2024-07-18 22:48:32
  * @LastEditors: wuxs 317009160@qq.com
- * @LastEditTime: 2024-08-05 20:09:34
+ * @LastEditTime: 2024-08-07 08:14:10
  * @FilePath: \tailwind-element-plus-template\src\routers\modules\home.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -33,6 +33,14 @@ export default {
       path: "/template",
       name: "Template",
       component: () => import("@/views/template/index.vue"),
+      meta: {
+        icon: "ListBullet",
+      },
+    },
+    {
+      path: "/playground",
+      name: "Playground",
+      component: () => import("@/views/playground/index.vue"),
       meta: {
         icon: "ListBullet",
       },

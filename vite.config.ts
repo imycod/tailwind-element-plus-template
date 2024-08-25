@@ -31,9 +31,11 @@ export default defineConfig(({mode}) => {
                     changeOrigin: true, // 是否修改请求头中的 Origin 字段
                     // rewrite: (path) => path.replace('/api', ''),
                 },
-                '/local': {
-                    target: 'http://localhost:9002',
-                    rewrite: (path) => path.replace('/local', ''),
+                '/auth': {
+                    target: env.VITE_AUTH_URL, // 目标服务器地址
+                    ws: false, // 是否启用 WebSocket
+                    changeOrigin: true, // 是否修改请求头中的 Origin 字段
+                    // rewrite: (path) => path.replace('/auth', ''),
                 }
             },
         },

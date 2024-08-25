@@ -39,7 +39,12 @@ const submitForm = (formEl: FormInstance | undefined) => {
     if (valid) {
       const store = useUserStoreHook()
       store.loginByPassword(form)
-          .then(store.authorize)
+          .then((res)=>{
+            setToken({
+              oAuthToken:res.token
+            })
+          })
+          // .then(store.authorize)
           .then(store.getUserInfo)
           .then(()=>{
             console.log('submit!')

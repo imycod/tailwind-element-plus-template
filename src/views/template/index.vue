@@ -97,7 +97,7 @@ const state = reactive({
 })
 const { getDataList, getSchema:getColumnSchema,currentChangeHandle, sizeChangeHandle, downBlobFile, tableStyle } = useTable(state)
 const columns = getColumnSchema({
-  // columnKeys:['name1','gender','name2','hobbie','date']
+  columnKeys:['name1','gender','name2','hobbie','date']
 })
 </script>
 

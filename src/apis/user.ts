@@ -1,4 +1,4 @@
-export const getUserInfo = () => http.get("/api/idm-app/user",{},{
+export const getUserInfo = () => http.get("/api/user",{},{
     headers:{
         Accept:'application/json'
     }

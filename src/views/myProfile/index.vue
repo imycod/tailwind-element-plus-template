@@ -15,21 +15,6 @@
     <div class="item-my-profile-card"></div>
 
     <div id="table"></div>
-
-    <el-select
-      v-model="value"
-      placeholder="Select"
-      style="width: 240px"
-    >
-      <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value"
-      />
-    </el-select>
-
-    <el-input v-model="input"></el-input>
   </div>
 </template>
 
@@ -70,33 +55,33 @@ function open() {
   })
 }
 
-const {addTable}= useTable({})
-addTable('#table',{
-  visible:true,
-  data:[{
-    id:1,
-    name:'张三',
-    age:18
-  },{
-    id:2,
-    name:'李四',
-    age:19
-  }],
-  column:[
-    {
-      title:'ID',
-      key:'id',
-    },
-    {
-      title:'姓名',
-      key:'name'
-    },
-    {
-      title:'年龄',
-      key:'age'
-    }
-  ]
-})
+// const {addTable}= useTable({})
+// addTable('#table',{
+//   visible:true,
+//   data:[{
+//     id:1,
+//     name:'张三',
+//     age:18
+//   },{
+//     id:2,
+//     name:'李四',
+//     age:19
+//   }],
+//   column:[
+//     {
+//       title:'ID',
+//       key:'id',
+//     },
+//     {
+//       title:'姓名',
+//       key:'name'
+//     },
+//     {
+//       title:'年龄',
+//       key:'age'
+//     }
+//   ]
+// })
 onMounted(async ()=>{
  // const result = await retry({ times:10,delay:1000 },getTodos)
  //  const result = await getTodos()

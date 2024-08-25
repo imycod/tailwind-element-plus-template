@@ -1,9 +1,9 @@
-import {createIFrameGuard} from "@/routers/guard/createIFrameGuard.ts";
-import {createProgressGuard} from "@/routers/guard/createProgressGuard.ts";
-import {createStateGuard} from "@/routers/guard/createStateGuard.ts";
-import {createAuthGuard} from "@/routers/guard/createAuthGuard.ts";
-import {createLoggerGuard} from "@/routers/guard/createLoggerGuard.ts";
-import {routeTimes} from "@/routers/log.ts";
+import { createIFrameGuard } from "@/routers/guard/createIFrameGuard.ts";
+import { createProgressGuard } from "@/routers/guard/createProgressGuard.ts";
+import { createStateGuard } from "@/routers/guard/createStateGuard.ts";
+import { createAuthGuard } from "@/routers/guard/createAuthGuard.ts";
+import { createLoggerGuard } from "@/routers/guard/createLoggerGuard.ts";
+import { routeTimes } from "@/routers/log.ts";
 
 /**
  * 0. login as admin deprecate to my_item, SP.8 客户一键登录移动只官网不需要考虑支持
@@ -20,14 +20,17 @@ import {routeTimes} from "@/routers/log.ts";
  * 内部导航会执行 （除remainingPaths、iframe） 1. logger 2. progress 4. auth
  *
  */
-export default function setupRootGuard(router) {
-    // global variable
-    let isInit = true
 
-    console.log('setupRootGuard')
-    createLoggerGuard(router)
-    createProgressGuard(router)
-    createStateGuard(router, isInit)
-    createIFrameGuard(router, routeTimes)
-    createAuthGuard(router, routeTimes)
+export default function setupRootGuard(router) {
+  // global variable
+  let isInit = true;
+  useEventBus('login').on(()=>{
+    redirectTo('/login')
+  })
+  console.log("setupRootGuard");
+  createLoggerGuard(router);
+  createProgressGuard(router);
+  createStateGuard(router, isInit);
+  createIFrameGuard(router, routeTimes);
+  createAuthGuard(router, routeTimes);
 }

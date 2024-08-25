@@ -31,6 +31,8 @@ const defaultConfig: AxiosRequestConfig = {
     Accept: "application/json, text/plain, */*", // 默认请求头接受类型
     "Content-Type": "application/json",
     "X-Requested-With": "XMLHttpRequest",
+    'Client-Id':import.meta.env.VITE_APP_CLIENT_ID,
+    'Client-Secret':import.meta.env.VITE_APP_CLIENT_SECRET,
   },
   // 数组格式参数序列化（https://github.com/axios/axios/issues/5142）
   paramsSerializer: {
@@ -160,6 +162,10 @@ class IHttp {
 
         if (process.env.LOGGER_SERVER_OPEN) {
           logger($error);
+        }
+
+        if ($error.response.status === 401) {
+          useEventBus('login').emit()
         }
 
         $error.isCancelRequest = Axios.isCancel($error);
